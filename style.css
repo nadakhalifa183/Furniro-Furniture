@@ -63,7 +63,9 @@
         @apply text-gray-500 hover:text-gray-900 transition-colors duration-200 cursor-pointer p-1.5 rounded-full hover:bg-gray-100;
     }
 
-
+.cart-badge{
+    @apply absolute -top-1.5 -right-1.5 bg-amber-700 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center
+}
 
     /*-------------  Header ----------------*/
 
@@ -126,6 +128,79 @@
     .category-item {
         @apply flex flex-col gap-6 items-center
     }
+
+    /*-----------------  products -------------------*/
+
+  .products-header{
+    @apply font-poppins font-bold text-[45px] text-center text-primary-grey
+  }
+
+  .products-container{
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 py-8 px-32 justify-items-center
+  }
+
+  .product-card{
+    @apply relative w-full max-w-[285px] aspect-[285/422] bg-primary-grey-light-pro overflow-hidden transition-transform  duration-300 shadow-sm hover:shadow-xl 
+  }
+
+  .product-img{
+    @apply relative w-full aspect-[285/301] 
+  }
+
+  .product-img img {
+    @apply transition-transform duration-500;
+}
+.product-card:hover .product-img img {
+    @apply scale-105;
+}
+  .product-badge{
+    @apply absolute top-5 right-5 bg-primary-red text-white text-[16px] font-medium font-poppins w-[48px] h-[48px] rounded-full flex items-center justify-center
+  }
+
+  .product-desc{
+    @apply bg-primary-light p-5
+  }
+  .product-desc h3{
+    @apply font-semibold font-poppins text-[24px] text-primary-grey
+  }
+
+  .product-desc p{
+    @apply font-medium font-poppins text-[16px] text-primary-grey-light
+  }
+
+  .price-group{
+    @apply flex  items-center gap-2
+  }
+  .price-group .new{
+    @apply font-semibold font-poppins text-[20px] text-primary-grey
+  }
+
+  .price-group .old{
+    @apply font-poppins text-[16px] text-primary-grey-light line-through
+  }
+
+.card-hover{
+    @apply absolute z-10 inset-0  opacity-0 transition-opacity duration-300 bg-primary-grey  flex flex-col justify-center items-center gap-4
+}
+
+.card-hover button{
+    @apply bg-white text-primary py-3 px-10 font-poppins font-semibold text-[16px]
+}
+
+.card-hover .options{
+    @apply flex  gap-4 items-center  font-poppins font-semibold text-[16px] text-white
+}
+
+.card-hover i{
+    @apply w-4 h-4
+}
+
+.product-card:hover .card-hover{
+   @apply opacity-75
+}
+.product-card:hover {
+    @apply -translate-y-1 shadow-xl;
+}
 
     /* ------------- gallery_setup -----------------  */
     .gallery-setup {
@@ -248,7 +323,7 @@
 
 
     .footer-bottom {
-        @apply w-[80%] mx-auto flex flex-col items-start;
+        @apply w-[80%] mx-auto flex flex-col items-start ;
     }
 
     .footer-divider {
@@ -256,7 +331,7 @@
     }
 
     .footer-bottom span {
-        @apply font-poppins text-[16] p-10
+        @apply font-poppins text-[16] py-8
     }
 
 

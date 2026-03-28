@@ -12,7 +12,10 @@ module.exports = {
         'primary': '#B88E2F',
         'primary-grey' : '#333333',
         'primary-grey-light' : '#666666',
-         'primary-grey-light-pro' : '#9F9F9F'
+         'primary-grey-light-pro' : '#9F9F9F',
+         'primary-light' : '#F4F5F7',
+        'primary-red' : '#eb6f72'
+
        
       }
     },

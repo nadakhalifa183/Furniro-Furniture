@@ -102,13 +102,18 @@
         <div class="products-header">
             <h2>Our products</h2>
         </div>
-        <div class="products-container">
-            <div class="product-card">
+        <div class="products-container" id="products-grid">
+            <!-- <div class="product-card" >
                 <div class="product-img">
                     <img src="images/16.png" alt="product image">
-                    <div class="product-badge">-30%</div>
+                    <div class="badge-new">New</div>
+                    <div class="badge-sale">-30%</div>
                 </div>
                 <div class="product-desc">
+                    <div class="stars">
+                        <span>★★★★☆</span>
+                        <span class="reviews">(124)</span>
+                    </div>
                     <h3>
                         Syltherine
                     </h3>
@@ -133,8 +138,11 @@
                     </div>
 
                 </div>
-            </div>
+            </div> -->
            
+        </div>
+        <div class="products-btn" id="products-btn">
+            <button class="show-more-btn" id="show-more-btn">Show More</button>
         </div>
     </section>
 
@@ -240,6 +248,7 @@
 
 </body>
 
+<script src="script.js"></script>
 </html>
 
 <!-- npx tailwindcss -i ./style.css -o ./output.css --watch -->

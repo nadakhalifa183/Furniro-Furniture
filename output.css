@@ -820,10 +820,17 @@ hr {
 
 /*-----------------  products -------------------*/
 
+.products {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
 .products-header {
-  text-align: center;
   font-family: Poppins, sans-serif;
-  font-size: 45px;
+  font-size: 200px;
   font-weight: 700;
   --tw-text-opacity: 1;
   color: rgb(51 51 51 / var(--tw-text-opacity));
@@ -833,7 +840,7 @@ hr {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
   justify-items: center;
-  gap: 0px;
+  gap: 1.5rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
   padding-left: 8rem;
@@ -854,7 +861,7 @@ hr {
 
 .product-card {
   position: relative;
-  aspect-ratio: 285/422;
+  aspect-ratio: 285/460;
   width: 100%;
   max-width: 285px;
   overflow: hidden;
@@ -878,9 +885,16 @@ hr {
   position: relative;
   aspect-ratio: 285/301;
   width: 100%;
+  --tw-bg-opacity: 1;
+  background-color: rgb(251 251 252 / var(--tw-bg-opacity));
 }
 
 .product-img img {
+  display: block;
+  aspect-ratio: 285/301;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 500ms;
@@ -892,7 +906,7 @@ hr {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.product-badge {
+.badge-sale {
   position: absolute;
   top: 1.25rem;
   right: 1.25rem;
@@ -911,23 +925,67 @@ hr {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.badge-new {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  border-radius: 0.125rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 197 94 / var(--tw-bg-opacity));
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 .product-desc {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
   --tw-bg-opacity: 1;
   background-color: rgb(244 245 247 / var(--tw-bg-opacity));
-  padding: 1.25rem;
+  padding: 1rem;
+}
+
+.stars span:first-child {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  --tw-text-opacity: 1;
+  color: rgb(250 204 21 / var(--tw-text-opacity));
+}
+
+.reviews {
+  margin-left: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
 .product-desc h3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
   font-family: Poppins, sans-serif;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 600;
   --tw-text-opacity: 1;
   color: rgb(51 51 51 / var(--tw-text-opacity));
 }
 
 .product-desc p {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   font-family: Poppins, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 500;
   --tw-text-opacity: 1;
   color: rgb(102 102 102 / var(--tw-text-opacity));
@@ -941,7 +999,7 @@ hr {
 
 .price-group .new {
   font-family: Poppins, sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   --tw-text-opacity: 1;
   color: rgb(51 51 51 / var(--tw-text-opacity));
@@ -963,7 +1021,7 @@ hr {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 2rem;
   --tw-bg-opacity: 1;
   background-color: rgb(51 51 51 / var(--tw-bg-opacity));
   opacity: 0;
@@ -991,7 +1049,7 @@ hr {
   align-items: center;
   gap: 1rem;
   font-family: Poppins, sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -1012,6 +1070,22 @@ hr {
   --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.products-btn {
+  margin-top: 2.5rem;
+  display: flex;
+  aspect-ratio: 245/48;
+  width: 245px;
+  justify-content: center;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(184 142 47 / var(--tw-border-opacity));
+  font-family: Poppins, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgb(184 142 47 / var(--tw-text-opacity));
 }
 
 /* ------------- gallery_setup -----------------  */

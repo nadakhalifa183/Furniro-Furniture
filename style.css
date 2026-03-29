@@ -63,9 +63,9 @@
         @apply text-gray-500 hover:text-gray-900 transition-colors duration-200 cursor-pointer p-1.5 rounded-full hover:bg-gray-100;
     }
 
-.cart-badge{
-    @apply absolute -top-1.5 -right-1.5 bg-amber-700 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center
-}
+    .cart-badge {
+        @apply absolute -top-1.5 -right-1.5 bg-amber-700 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center
+    }
 
     /*-------------  Header ----------------*/
 
@@ -131,76 +131,101 @@
 
     /*-----------------  products -------------------*/
 
-  .products-header{
-    @apply font-poppins font-bold text-[45px] text-center text-primary-grey
-  }
+    .products {
+        @apply flex flex-col items-center py-6
+    }
 
-  .products-container{
-    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 py-8 px-32 justify-items-center
-  }
+    .products-header {
+        @apply font-poppins font-bold text-[200px]  text-primary-grey
+    }
 
-  .product-card{
-    @apply relative w-full max-w-[285px] aspect-[285/422] bg-primary-grey-light-pro overflow-hidden transition-transform  duration-300 shadow-sm hover:shadow-xl 
-  }
+    .products-container {
+        @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 py-8 px-32 justify-items-center
+    }
 
-  .product-img{
-    @apply relative w-full aspect-[285/301] 
-  }
+    .product-card {
+        @apply relative w-full max-w-[285px] aspect-[285/460]  bg-primary-grey-light-pro overflow-hidden transition-transform duration-300 shadow-sm hover:shadow-xl
+    }
 
-  .product-img img {
-    @apply transition-transform duration-500;
-}
-.product-card:hover .product-img img {
-    @apply scale-105;
-}
-  .product-badge{
-    @apply absolute top-5 right-5 bg-primary-red text-white text-[16px] font-medium font-poppins w-[48px] h-[48px] rounded-full flex items-center justify-center
-  }
+    .product-img {
+        @apply relative w-full aspect-[285/301] bg-[#fbfbfc]
+    }
 
-  .product-desc{
-    @apply bg-primary-light p-5
-  }
-  .product-desc h3{
-    @apply font-semibold font-poppins text-[24px] text-primary-grey
-  }
+    .product-img img {
+        @apply transition-transform duration-500 w-full aspect-[285/301] object-cover block;
+    }
 
-  .product-desc p{
-    @apply font-medium font-poppins text-[16px] text-primary-grey-light
-  }
+    .product-card:hover .product-img img {
+        @apply scale-105;
+    }
 
-  .price-group{
-    @apply flex  items-center gap-2
-  }
-  .price-group .new{
-    @apply font-semibold font-poppins text-[20px] text-primary-grey
-  }
+    .badge-sale {
+        @apply absolute top-5 right-5 bg-primary-red text-white text-[16px] font-medium font-poppins w-[48px] h-[48px] rounded-full flex items-center justify-center
+    }
 
-  .price-group .old{
-    @apply font-poppins text-[16px] text-primary-grey-light line-through
-  }
+    .badge-new {
+        @apply absolute top-5 left-5 bg-green-500 text-white text-sm rounded-sm font-semibold px-3 py-1;
+    }
 
-.card-hover{
-    @apply absolute z-10 inset-0  opacity-0 transition-opacity duration-300 bg-primary-grey  flex flex-col justify-center items-center gap-4
-}
+    .product-desc {
+        @apply bg-primary-light p-4 flex flex-col gap-1
+    }
 
-.card-hover button{
-    @apply bg-white text-primary py-3 px-10 font-poppins font-semibold text-[16px]
-}
+    .stars span:first-child {
+        @apply text-yellow-400 text-xl;
+    }
 
-.card-hover .options{
-    @apply flex  gap-4 items-center  font-poppins font-semibold text-[16px] text-white
-}
+    .reviews {
+        @apply text-gray-400 text-sm ml-1;
+    }
 
-.card-hover i{
-    @apply w-4 h-4
-}
+    .product-desc h3 {
+        @apply font-semibold font-poppins text-[18px] text-primary-grey line-clamp-1
+    }
 
-.product-card:hover .card-hover{
-   @apply opacity-75
-}
-.product-card:hover {
-    @apply -translate-y-1 shadow-xl;
-}
+    .product-desc p {
+        @apply font-medium font-poppins text-[12px] text-primary-grey-light line-clamp-2
+    }
+
+    .price-group {
+        @apply flex items-center gap-2
+    }
+
+    .price-group .new {
+        @apply font-semibold font-poppins text-[16px] text-primary-grey
+    }
+
+    .price-group .old {
+        @apply font-poppins text-[16px] text-primary-grey-light line-through
+    }
+
+    .card-hover {
+        @apply absolute z-10 inset-0 opacity-0 transition-opacity duration-300 bg-primary-grey flex flex-col justify-center items-center gap-8
+    }
+
+    .card-hover button {
+        @apply bg-white text-primary py-3 px-10 font-poppins font-semibold text-[16px]
+    }
+
+    .card-hover .options {
+        @apply flex gap-4 items-center font-poppins font-semibold text-[14px] text-white
+    }
+
+    .card-hover i {
+        @apply w-4 h-4
+    }
+
+    .product-card:hover .card-hover {
+        @apply opacity-75
+    }
+
+    .product-card:hover {
+        @apply -translate-y-1 shadow-xl;
+    }
+
+    .products-btn {
+        @apply flex justify-center mt-10 w-[245px] aspect-[245/48] font-poppins font-semibold text-[16px] text-primary border border-primary
+    }
 
     /* ------------- gallery_setup -----------------  */
     .gallery-setup {
@@ -323,7 +348,7 @@
 
 
     .footer-bottom {
-        @apply w-[80%] mx-auto flex flex-col items-start ;
+        @apply w-[80%] mx-auto flex flex-col items-start;
     }
 
     .footer-divider {

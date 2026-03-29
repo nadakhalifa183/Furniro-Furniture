@@ -1,3 +1,38 @@
+// --------------------------------- nav bar -------------------
+
+function handleActiveLinks() {
+    const currentPath = window.location.pathname;
+    
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+      
+        link.classList.remove('active-link');
+
+        const href = link.getAttribute('href');
+
+      
+        if (currentPath.includes(href) && href !== 'index.html' && href !== '#') {
+            link.classList.add('active-link');
+        }
+
+     
+        if (currentPath === '/' || currentPath.endsWith('index.html')) {
+            if (href.includes('index.html')) {
+                link.classList.add('active-link');
+            }
+        }
+    });
+}
+
+
+window.addEventListener('DOMContentLoaded', handleActiveLinks);
+// handleActiveLinks();
+
+
+
+// --------------------------------- display products -------------------
+
 // fetch('products.json').then(res => res.json() ).then(data => {console.log(data)});
 
 fetch('products.json')
@@ -8,17 +43,17 @@ fetch('products.json')
         const grid = document.getElementById('products-grid');
         const showMoreBtn = document.getElementById('products-btn');
 
-        let visibleCount = 8; // show 8 at start
+        let visibleCount = 8; 
 
         function renderProducts() {
 
-            grid.innerHTML = ''; // clear grid first
+            grid.innerHTML = ''; 
 
-            // only show products up to visibleCount
+     
             const visible = products.slice(0, visibleCount);
 
             visible.forEach(product => {
-                // Generate star display from rating
+             
                 const fullStars = Math.floor(product.rating);
                 const halfStar = product.rating % 1 >= 0.5;
                 const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
@@ -61,18 +96,18 @@ fetch('products.json')
                 </div>
             `;
             });
-            // hide button if all products shown
+            
             if (visibleCount >= products.length) {
                 showMoreBtn.style.display = 'none';
             }
         }
 
-        // first render
+       
         renderProducts();
 
-        // show more click
+      
         showMoreBtn.addEventListener('click', () => {
-            visibleCount += 4; // load 4 more each click
+            visibleCount += 4; 
             renderProducts();
         });
 

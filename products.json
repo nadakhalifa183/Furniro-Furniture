@@ -496,7 +496,7 @@
       "colorHex": "#C4BCA8",
       "dimensions": { "width": 70, "height": 80, "depth": 72, "unit": "cm" },
       "size": "medium",
-      "material": "fabric",
+      "material": "fabric", 
       "stock": 11,
       "stockStatus": "in_stock",
       "rating": 4.3,

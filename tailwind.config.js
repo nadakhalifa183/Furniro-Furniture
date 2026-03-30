@@ -14,7 +14,8 @@ module.exports = {
         'primary-grey-light' : '#666666',
          'primary-grey-light-pro' : '#9F9F9F',
          'primary-light' : '#F4F5F7',
-        'primary-red' : '#eb6f72'
+        'primary-red' : '#eb6f72',
+       'primary-beige' : '#F9F1E7'
 
        
       }

@@ -8,8 +8,7 @@ A fully responsive, modern furniture e-commerce frontend.
 
 <br>
 
-🌐 [Live Demo](https://nadakhalifa183.github.io/Furniro-Furniture/) · 📐 [Figma Design]([https://www.figma.com/](https://www.figma.com/design/PAj8TZ0SSH6Lg4Csvj1BY4/Furniture-eCommerce-Website-UI--Community-?node-id=1-3&p=f&t=id3P5BlhoO0evVDR-0)) · 🐛 [Report a Bug](https://github.com/nadakhalifa183/furniro/issues)
-
+🌐 [Live Demo](https://nadakhalifa183.github.io/Furniro-Furniture/) · 📐 [Figma Design](https://www.figma.com/design/PAj8TZ0SSH6Lg4Csvj1BY4/Furniture-eCommerce-Website-UI--Community-?node-id=1-3&p=f&t=id3P5BlhoO0evVDR-0)
 <br>
 
 </div>

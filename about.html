@@ -1,180 +1,809 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Furniro</title>
+    <title>About Us — Furniro</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  
     <link rel="stylesheet" href="output.css">
+
+    <style>
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #3A3A3A;
+            overflow-x: hidden;
+        }
+
+        /* ── Section common ── */
+        .about-section {
+            padding: 80px 0;
+        }
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .about-eyebrow {
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #B88E2F;
+            margin-bottom: .75rem;
+        }
+        .about-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 700;
+            color: #3A3A3A;
+            line-height: 1.25;
+            margin-bottom: 1.25rem;
+        }
+        .about-body {
+            font-size: .95rem;
+            color: #666;
+            line-height: 1.85;
+        }
+        .about-divider {
+            width: 56px;
+            height: 3px;
+            background: #B88E2F;
+            border-radius: 2px;
+            margin-bottom: 1.25rem;
+        }
+
+        /* ══════════════════════════════════════════
+           1. BRAND STORY
+        ══════════════════════════════════════════ */
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        .story-image-wrap {
+            position: relative;
+        }
+        .story-image-wrap img {
+            width: 100%;
+            height: 520px;
+            object-fit: cover;
+            border-radius: 20px;
+            display: block;
+        }
+        .story-badge {
+            position: absolute;
+            bottom: -28px;
+            right: -28px;
+            width: 120px;
+            height: 120px;
+            background: #B88E2F;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            box-shadow: 0 8px 32px rgba(184,142,47,.4);
+        }
+        .story-badge .badge-num {
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .story-badge .badge-text {
+            font-size: .6rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-align: center;
+            text-transform: uppercase;
+            line-height: 1.3;
+            padding: 0 .5rem;
+        }
+        .story-image-bg {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            right: -24px;
+            bottom: -24px;
+            background: #F9F1E7;
+            border-radius: 20px;
+            z-index: -1;
+        }
+        .story-text { padding-left: 1rem; }
+        .story-text p + p { margin-top: 1rem; }
+        .story-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: .6rem;
+            margin-top: 2rem;
+            background: #B88E2F;
+            color: #fff;
+            padding: .85rem 2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: .9rem;
+            text-decoration: none;
+            transition: background .2s;
+        }
+        .story-cta:hover { background: #9A7320; }
+
+        /* ══════════════════════════════════════════
+           2. STATS
+        ══════════════════════════════════════════ */
+        .stats-section {
+            background: #3A3A3A;
+            padding: 60px 0;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+        .stat-item { padding: 1.5rem 1rem; }
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #B88E2F;
+            line-height: 1;
+            margin-bottom: .4rem;
+        }
+        .stat-label {
+            font-size: .82rem;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: #fff;
+            opacity: .85;
+        }
+        .stat-divider {
+            width: 1px;
+            background: rgba(255,255,255,.15);
+            margin: auto;
+        }
+
+        /* ══════════════════════════════════════════
+           3. CORE VALUES
+        ══════════════════════════════════════════ */
+        .values-section { background: #F4F5F7; }
+        .values-header { text-align: center; margin-bottom: 3.5rem; }
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        .value-card {
+            background: #fff;
+            border-radius: 18px;
+            padding: 2.5rem 1.75rem;
+            text-align: center;
+            border: 1px solid #EDE8E0;
+            transition: box-shadow .3s, transform .3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: #B88E2F;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .3s;
+        }
+        .value-card:hover { box-shadow: 0 16px 48px rgba(0,0,0,.1); transform: translateY(-6px); }
+        .value-card:hover::before { transform: scaleX(1); }
+        .value-icon {
+            width: 68px; height: 68px;
+            background: #F9F1E7;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.5rem;
+            transition: background .3s;
+        }
+        .value-card:hover .value-icon { background: #B88E2F; }
+        .value-icon svg { transition: stroke .3s; }
+        .value-card:hover .value-icon svg { stroke: #fff; }
+        .value-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #3A3A3A;
+            margin-bottom: .6rem;
+        }
+        .value-card p {
+            font-size: .85rem;
+            color: #888;
+            line-height: 1.75;
+        }
+
+        /* ══════════════════════════════════════════
+           4. TEAM
+        ══════════════════════════════════════════ */
+        .team-section { background: #fff; }
+        .team-header { text-align: center; margin-bottom: 3.5rem; }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .team-card {
+            background: #F9F1E7;
+            border-radius: 20px;
+            overflow: hidden;
+            text-align: center;
+            transition: box-shadow .3s, transform .3s;
+        }
+        .team-card:hover { box-shadow: 0 16px 48px rgba(0,0,0,.1); transform: translateY(-6px); }
+        .team-avatar-wrap {
+            background: #3A3A3A;
+            padding: 3rem 2rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .team-avatar {
+            width: 110px; height: 110px; border-radius: 50%;
+            background: linear-gradient(135deg, #B88E2F 0%, #D4AA50 100%);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem; font-weight: 700; color: #fff;
+            border: 4px solid rgba(255,255,255,.2);
+            box-shadow: 0 8px 28px rgba(184,142,47,.35);
+        }
+        .team-info { padding: 2rem 1.75rem; }
+        .team-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem; font-weight: 700;
+            color: #3A3A3A; margin-bottom: .3rem;
+        }
+        .team-role {
+            font-size: .78rem; font-weight: 700;
+            letter-spacing: 1.5px; text-transform: uppercase;
+            color: #B88E2F; margin-bottom: .9rem;
+        }
+        .team-bio {
+            font-size: .84rem; color: #777; line-height: 1.75;
+            margin-bottom: 1.25rem;
+        }
+        .team-socials { display: flex; gap: .6rem; justify-content: center; }
+        .team-social-btn {
+            width: 36px; height: 36px; border-radius: 50%;
+            border: 1.5px solid #EDE8E0;
+            display: flex; align-items: center; justify-content: center;
+            color: #9F9F9F; text-decoration: none;
+            transition: background .2s, border-color .2s, color .2s;
+            font-size: .85rem;
+        }
+        .team-social-btn:hover {
+            background: #B88E2F; border-color: #B88E2F; color: #fff;
+        }
+
+        /* ══════════════════════════════════════════
+           5. WHY CHOOSE US
+        ══════════════════════════════════════════ */
+        .why-section { background: #F4F5F7; }
+        .why-header { text-align: center; margin-bottom: 3.5rem; }
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.75rem;
+        }
+        .why-card {
+            background: #fff;
+            border-radius: 18px;
+            padding: 2.5rem 2rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            border: 1px solid #EDE8E0;
+            transition: box-shadow .3s, transform .3s;
+        }
+        .why-card:hover { box-shadow: 0 12px 36px rgba(0,0,0,.09); transform: translateY(-4px); }
+        .why-icon {
+            width: 60px; height: 60px; flex-shrink: 0;
+            background: #F9F1E7; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            transition: background .2s;
+        }
+        .why-card:hover .why-icon { background: #B88E2F; }
+        .why-card:hover .why-icon svg { stroke: #fff; }
+        .why-icon svg { transition: stroke .2s; }
+        .why-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem; font-weight: 700;
+            color: #3A3A3A; margin-bottom: .5rem;
+        }
+        .why-text p { font-size: .87rem; color: #888; line-height: 1.75; }
+
+        /* ══════════════════════════════════════════
+           RESPONSIVE
+        ══════════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-grid  { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .story-grid   { grid-template-columns: 1fr; gap: 3rem; }
+            .story-image-wrap { max-width: 480px; margin: 0 auto; }
+            .story-badge  { bottom: -20px; right: -10px; width: 96px; height: 96px; }
+            .team-grid    { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+            .why-grid     { grid-template-columns: 1fr; }
+            .about-section { padding: 56px 0; }
+        }
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .values-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
+
 <body>
-    <nav class="navbar">
-        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
 
-            <div class="flex items-center gap-2">
-                <img src="images/logo.png" alt="logo-icon" class="w-10 h-10 object-contain">
-                <span class="font-bold text-2xl font-montserrat">Furniro</span>
+<!-- ═══════════════════════════════════════════
+     NAVBAR  (identical to all other pages)
+═══════════════════════════════════════════ -->
+<nav class="navbar">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
+
+        <a href="index.html" class="flex items-center gap-2">
+            <img src="images/logo.png" alt="Furniro logo" class="w-10 h-10 object-contain">
+            <span class="font-bold text-2xl font-montserrat">Furniro</span>
+        </a>
+
+        <ul class="flex items-center gap-8">
+            <li><a href="index.html"  class="nav-link">Home</a></li>
+            <li><a href="shop.html"   class="nav-link">Shop</a></li>
+            <li><a href="about.html"  class="nav-link active-link">About</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="flex items-center gap-8">
+            <button class="icon-btn" title="account">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                          d="M20 12V7h2v6h-2m0 4h2v-2h-2m-10-2c2.67 0 8 1.34 8 4v3H2v-3
+                             c0-2.66 5.33-4 8-4m0-9a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4
+                             a4 4 0 0 1 4-4m0 10.9c-2.97 0-6.1 1.46-6.1 2.1v1.1h12.2V17
+                             c0-.64-3.13-2.1-6.1-2.1m0-9A2.1 2.1 0 0 0 7.9 8a2.1 2.1 0 0 0
+                             2.1 2.1A2.1 2.1 0 0 0 12.1 8A2.1 2.1 0 0 0 10 5.9"/>
+                </svg>
+            </button>
+
+            <!-- search icon — activated by furniro-extras.js -->
+            <button class="icon-btn" title="search">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round"
+                          stroke-width="2"
+                          d="m21 21l-4.486-4.494M19 10.5a8.5 8.5 0 1 1-17 0a8.5 8.5 0 0 1 17 0Z"/>
+                </svg>
+            </button>
+
+            <a href="cart.html" class="icon-btn relative" title="cart">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 1024 1024">
+                    <path fill="currentColor"
+                          d="M922.9 701.9H327.4l29.9-60.9l496.8-.9c16.8 0 31.2-12 34.2-28.6
+                             l68.8-385.1c1.8-10.1-.9-20.5-7.5-28.4a34.99 34.99 0 0 0-26.6-12.5
+                             l-632-2.1l-5.4-25.4c-3.4-16.2-18-28-34.6-28H96.5a35.3 35.3 0 1 0 0
+                             70.6h125.9L246 312.8l58.1 281.3l-74.8 122.1a34.96 34.96 0 0 0-3 36.8
+                             c6 11.9 18.1 19.4 31.5 19.4h62.8a102.43 102.43 0 0 0-20.6 61.7
+                             c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6
+                             c0-22.3-7.4-44-20.6-61.7h161.1a102.43 102.43 0 0 0-20.6 61.7
+                             c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6
+                             c0-22.3-7.4-44-20.6-61.7H923c19.4 0 35.3-15.8 35.3-35.3
+                             a35.42 35.42 0 0 0-35.4-35.2M305.7 253l575.8 1.9l-56.4 315.8l-452.3.8z
+                             m96.9 612.7c-17.4 0-31.6-14.2-31.6-31.6s14.2-31.6 31.6-31.6
+                             s31.6 14.2 31.6 31.6a31.6 31.6 0 0 1-31.6 31.6m325.1 0
+                             c-17.4 0-31.6-14.2-31.6-31.6s14.2-31.6 31.6-31.6s31.6 14.2
+                             31.6 31.6a31.6 31.6 0 0 1-31.6 31.6"/>
+                </svg>
+                <span id="cart-badge" class="cart-badge">0</span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     PAGE HEADER
+═══════════════════════════════════════════ -->
+<section class="page-header">
+    <div class="header-bg-container">
+        <img src="images/page-header.jpg" alt="About Furniro" class="header-bg-img">
+        <div class="header-overlay"></div>
+    </div>
+    <div class="header-content">
+        <img src="images/logo.png" alt="Logo" class="header-logo">
+        <h2 class="header-title">About Us</h2>
+        <div class="breadcrumb">
+            <a href="index.html" class="breadcrumb-link">Home</a>
+            <span class="breadcrumb-separator">&rsaquo;</span>
+            <span class="breadcrumb-current">About</span>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     1. BRAND STORY
+═══════════════════════════════════════════ -->
+<section class="about-section" style="background:#fff;">
+    <div class="about-container">
+        <div class="story-grid">
+
+            <!-- Image -->
+            <div class="story-image-wrap">
+                <div class="story-image-bg"></div>
+                <img src="images/gallery/Rectangle 40.png"
+                     alt="Furniro workshop"
+                     onerror="this.src='https://via.placeholder.com/600x520/F9F1E7/B88E2F?text=Our+Story'">
+                <div class="story-badge">
+                    <span class="badge-num">12+</span>
+                    <span class="badge-text">Years of Excellence</span>
+                </div>
             </div>
 
-            <ul class="flex items-center gap-8">
-                <li><a href="index.html" class="nav-link ">Home</a></li>
-                <li><a href="shop.html" class="nav-link ">Shop</a></li>
-                <li><a href="about.html" class="nav-link ">About</a></li>
-                <li><a href="contact.html" class="nav-link ">Contact</a></li>
+            <!-- Text -->
+            <div class="story-text">
+                <p class="about-eyebrow">Our Story</p>
+                <h2 class="about-heading">Crafting Spaces,<br>Building Memories</h2>
+                <div class="about-divider"></div>
+                <p class="about-body">
+                    Furniro was born from a single, enduring belief — that every home deserves
+                    furniture as unique as the people who live in it. Founded in 2012 by a team
+                    of passionate designers and seasoned craftsmen, we set out to bridge the gap
+                    between high-end artistry and everyday affordability.
+                </p>
+                <p class="about-body" style="margin-top:1rem;">
+                    From our workshops in Coral Gables, Florida, each piece is conceived with
+                    intention: thoughtfully sourced materials, meticulous joinery, and a design
+                    language that respects both modern minimalism and timeless warmth. We don't
+                    just make furniture — we create the backdrop for your most important moments.
+                </p>
+                <p class="about-body" style="margin-top:1rem;">
+                    Today, Furniro serves thousands of families and design professionals across
+                    15 countries, staying true to the craft principles that started it all.
+                </p>
+                <a href="shop.html" class="story-cta">
+                    Explore Our Collection
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     2. STATS  (dark band)
+═══════════════════════════════════════════ -->
+<section class="stats-section">
+    <div class="about-container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-num">10K+</div>
+                <div class="stat-label">Happy Customers</div>
+            </div>
+            <div class="stat-item" style="border-left:1px solid rgba(255,255,255,.15);">
+                <div class="stat-num">500+</div>
+                <div class="stat-label">Unique Products</div>
+            </div>
+            <div class="stat-item" style="border-left:1px solid rgba(255,255,255,.15);">
+                <div class="stat-num">50+</div>
+                <div class="stat-label">Expert Craftsmen</div>
+            </div>
+            <div class="stat-item" style="border-left:1px solid rgba(255,255,255,.15);">
+                <div class="stat-num">15+</div>
+                <div class="stat-label">Countries Served</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     3. CORE VALUES
+═══════════════════════════════════════════ -->
+<section class="about-section values-section">
+    <div class="about-container">
+        <div class="values-header">
+            <p class="about-eyebrow">What We Stand For</p>
+            <h2 class="about-heading">Our Core Values</h2>
+            <p class="about-body" style="max-width:520px;margin:0 auto;">
+                Every decision we make — from material sourcing to final delivery — is guided
+                by four principles we refuse to compromise on.
+            </p>
+        </div>
+
+        <div class="values-grid">
+
+            <!-- Craftsmanship -->
+            <div class="value-card">
+                <div class="value-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                         stroke="#B88E2F" stroke-width="1.8" stroke-linecap="round">
+                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0
+                                 l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0
+                                 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                    </svg>
+                </div>
+                <h3>Craftsmanship Excellence</h3>
+                <p>We partner with skilled artisans who have dedicated their lives to their
+                   craft. Every joint, finish, and curve is executed with unwavering precision.</p>
+            </div>
+
+            <!-- Sustainability -->
+            <div class="value-card">
+                <div class="value-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                         stroke="#B88E2F" stroke-width="1.8" stroke-linecap="round">
+                        <path d="M2 22c1.25-1.25 2.5-2 4-2c1.5 0 2.75.75 4 1.5S12.5 23 14
+                                 23c1.5 0 2.75-.75 4-2M6 17.5C7.25 16.25 8.5 16 10 16
+                                 c1.5 0 2.75.75 4 1.5S16.5 19 18 19"/>
+                        <path d="M12 2a9 9 0 0 1 0 14"/>
+                        <path d="M12 2a9 9 0 0 0 0 14"/>
+                    </svg>
+                </div>
+                <h3>Sustainable Sourcing</h3>
+                <p>We responsibly source materials from certified forests and eco-conscious
+                   suppliers, minimising our environmental footprint without sacrificing quality.</p>
+            </div>
+
+            <!-- Innovation -->
+            <div class="value-card">
+                <div class="value-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                         stroke="#B88E2F" stroke-width="1.8" stroke-linecap="round">
+                        <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1
+                                 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5
+                                 9a7 7 0 0 1 7-7zM9 21h6M10 17v4M14 17v4"/>
+                    </svg>
+                </div>
+                <h3>Modern Innovation</h3>
+                <p>Tradition informs our craft but never limits it. We continuously explore
+                   new design languages, smart materials, and ergonomic research to stay ahead.</p>
+            </div>
+
+            <!-- Customer First -->
+            <div class="value-card">
+                <div class="value-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                         stroke="#B88E2F" stroke-width="1.8" stroke-linecap="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06
+                                 a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78
+                                 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </div>
+                <h3>Customer Devotion</h3>
+                <p>Our relationship doesn't end at checkout. We stand by every piece with
+                   dedicated after-sales support, transparent policies, and genuine care.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     5. WHY CHOOSE US
+═══════════════════════════════════════════ -->
+<section class="about-section why-section">
+    <div class="about-container">
+        <div class="why-header">
+            <p class="about-eyebrow">Our Difference</p>
+            <h2 class="about-heading">Why Thousands Choose Furniro</h2>
+            <p class="about-body" style="max-width:500px;margin:0 auto;">
+                Good furniture should outlast trends. Here is how we make sure ours does.
+            </p>
+        </div>
+
+        <div class="why-grid">
+
+            <!-- Premium Materials -->
+            <div class="why-card">
+                <div class="why-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                         stroke="#B88E2F" stroke-width="1.8" stroke-linecap="round">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02
+                                         12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                </div>
+                <div class="why-text">
+                    <h3>Premium Materials Only</h3>
+                    <p>Every piece of wood is hand-selected. Every fabric is tested for
+                       durability and feel. We use only top-tier materials that age
+                       beautifully and stand the test of daily life.</p>
+                </div>
+            </div>
+
+            <!-- Expert Craftsmanship -->
+            <div class="why-card">
+                <div class="why-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                         stroke="#B88E2F" stroke-width="1.8" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
+                </div>
+                <div class="why-text">
+                    <h3>Handcrafted with Time</h3>
+                    <p>We don't rush production. Each Furniro piece receives up to 60
+                       hours of skilled handwork, ensuring that what arrives in your home
+                       is finished with care — not on a conveyor belt.</p>
+                </div>
+            </div>
+
+            <!-- Free Shipping -->
+            <div class="why-card">
+                <div class="why-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                         stroke="#B88E2F" stroke-width="1.8" stroke-linecap="round">
+                        <rect x="1" y="3" width="15" height="13" rx="1"/>
+                        <path d="M16 8h4l3 5v3h-7V8z"/>
+                        <circle cx="5.5" cy="18.5" r="2.5"/>
+                        <circle cx="18.5" cy="18.5" r="2.5"/>
+                    </svg>
+                </div>
+                <div class="why-text">
+                    <h3>Free White-Glove Delivery</h3>
+                    <p>Orders above $150 are delivered free, right to the room of your
+                       choice. Our delivery teams are trained to handle every piece with
+                       the respect it deserves from workshop to doorstep.</p>
+                </div>
+            </div>
+
+            <!-- 2-Year Warranty -->
+            <div class="why-card">
+                <div class="why-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                         stroke="#B88E2F" stroke-width="1.8" stroke-linecap="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="m9 12 2 2 4-4"/>
+                    </svg>
+                </div>
+                <div class="why-text">
+                    <h3>2-Year Warranty &amp; Easy Returns</h3>
+                    <p>Every Furniro product is protected by a comprehensive 2-year
+                       warranty covering structural defects. Changed your mind?
+                       Our 30-day hassle-free return policy has you covered.</p>
+                </div>
+            </div>
+
+            <!-- Design Expertise -->
+            <div class="why-card">
+                <div class="why-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                         stroke="#B88E2F" stroke-width="1.8" stroke-linecap="round">
+                        <path d="M2 13.5V21h7.5L21 9.5 14.5 3 2 13.5z"/>
+                        <path d="M14.5 3 21 9.5"/>
+                    </svg>
+                </div>
+                <div class="why-text">
+                    <h3>In-House Design Expertise</h3>
+                    <p>Our team of 12 in-house designers works closely with each production
+                       run, refining proportions and details that catalogues never show you.
+                       The result: furniture that looks as considered as it feels.</p>
+                </div>
+            </div>
+
+            <!-- 24/7 Support -->
+            <div class="why-card">
+                <div class="why-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                         stroke="#B88E2F" stroke-width="1.8" stroke-linecap="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14
+                                 a2 2 0 0 1 2 2z"/>
+                    </svg>
+                </div>
+                <div class="why-text">
+                    <h3>Dedicated 24/7 Support</h3>
+                    <p>Whether you need help choosing the right piece, tracking your
+                       delivery, or sorting a warranty claim — our support team is available
+                       around the clock, seven days a week.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ----------- Services------------------- -->
+
+<section class="service">
+    <div class="service-container">
+        <div class="service-item">
+            <div class="service-icon">
+                <img src="images/services/trophy 1.png" alt="High Quality">
+            </div>
+            <div class="service-content">
+                <div class="service-title">High Quality</div>
+                <div class="service-desc">crafted from top materials</div>
+            </div>
+        </div>
+        <div class="service-item">
+            <div class="service-icon">
+                <img src="images/services/guarantee.png" alt="Warranty Protection">
+            </div>
+            <div class="service-content">
+                <div class="service-title">Warranty Protection</div>
+                <div class="service-desc">over 2 years</div>
+            </div>
+        </div>
+        <div class="service-item">
+            <div class="service-icon">
+                <img src="images/services/shipping.png" alt="Free Shipping">
+            </div>
+            <div class="service-content">
+                <div class="service-title">Free Shipping</div>
+                <div class="service-desc">Order over 150$</div>
+            </div>
+        </div>
+        <div class="service-item">
+            <div class="service-icon">
+                <img src="images/services/customer-support.png" alt="24/7 Support">
+            </div>
+            <div class="service-content">
+                <div class="service-title">24 / 7 Support</div>
+                <div class="service-desc">Dedicated support</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ----------- Footer------------------- -->
+<footer>
+    <div class="footer-top">
+        <div class="footer-title">
+            <div class="footer-icon">Furniro.</div>
+            <div class="footer-address">
+                400 University Drive Suite 200 Coral Gables,<br>
+                FL 33134 USA
+            </div>
+        </div>
+        <div class="footer-links">
+            <span>Links</span>
+            <ul>
+                <li><a href="index.html"   class="footer-link">Home</a></li>
+                <li><a href="shop.html"    class="footer-link">Shop</a></li>
+                <li><a href="about.html"   class="footer-link">About</a></li>
+                <li><a href="contact.html" class="footer-link">Contact</a></li>
             </ul>
-            <div class="flex items-center gap-8">
-
-                <button class="icon-btn" title="accont">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M20 12V7h2v6h-2m0 4h2v-2h-2m-10-2c2.67 0 8 1.34 
-                        8 4v3H2v-3c0-2.66 5.33-4 8-4m0-9a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 
-                        10.9c-2.97 0-6.1 1.46-6.1 2.1v1.1h12.2V17c0-.64-3.13-2.1-6.1-2.1m0-9A2.1 2.1 0 0 0 7.9 8a2.1 2.1 0 0 0 2.1 2.1A2.1 2.1 0 0 0 12.1 8A2.1 2.1 0 0 0 10 5.9" />
-                    </svg>
-                </button>
-                <button class="icon-btn" title="search">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
-                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                            d="m21 21l-4.486-4.494M19 10.5a8.5 8.5 0 1 1-17 0a8.5 8.5 0 0 1 17 0Z" />
-                    </svg>
-                </button>
-                <button class="icon-btn relative" title="cart">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 1024 1024">
-                        <path fill="currentColor"
-                            d="M922.9 701.9H327.4l29.9-60.9l496.8-.9c16.8 0 31.2-12 34.2-28.6l68.8-385.1c1.8-10.1-.9-20.5-7.5-28.4a34.99 34.99 
-                         0 0 0-26.6-12.5l-632-2.1l-5.4-25.4c-3.4-16.2-18-28-34.6-28H96.5a35.3 35.3 0 1 0 0 70.6h125.9L246 312.8l58.1 281.3l-74.8 122.1a34.96 34.96 0 0 0-3 36.8c6 11.9 18.1 19.4 31.5 19.4h62.8a102.43
-                         102.43 0 0 0-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7h161.1a102.43 102.43 0 0 0-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7H923c19.4 0 35.3-15.8 35.3-35.3a35.42 35.42 0 0 0-35.4-35.2M305.7 253l575.8
-                          1.9l-56.4 315.8l-452.3.8zm96.9 612.7c-17.4 0-31.6-14.2-31.6-31.6s14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 0 1-31.6 31.6m325.1 0c-17.4 0-31.6-14.2-31.6-31.6s14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 0 1-31.6 31.6" />
-                    </svg>
-                    <span
-                        class="cart-badge">3</span>
-                </button>
+        </div>
+        <div class="footer-help">
+            <span>Help</span>
+            <ul>
+                <li><a href="#" class="footer-link">Payment Options</a></li>
+                <li><a href="#" class="footer-link">Returns</a></li>
+                <li><a href="#" class="footer-link">Privacy Policies</a></li>
+            </ul>
+        </div>
+        <div class="footer-subscribe">
+            <span>Newsletter</span>
+            <div class="subscribe-wrapper">
+                <input type="email" placeholder="Enter Your Email Address"
+                       class="subscribe-input">
+                <button class="subscribe-btn">Subscribe</button>
             </div>
         </div>
-    </nav>
-
-    <section class="page-header">
-        <div class="header-bg-container">
-            <img src="images/page-header.jpg" alt="About Header" class="header-bg-img">
-            <div class="header-overlay"></div>
-        </div>
-    
-        <div class="header-content">
-            <img src="images/logo.png" alt="Logo" class="header-logo">
-            <h2 class="header-title">Shop</h2>
-            
-            <div class="breadcrumb">
-                <a href="../index.html" class="breadcrumb-link">Home</a>
-                <span class="breadcrumb-separator">></span>
-                <span class="breadcrumb-current">Blog</span>
-            </div>
-        </div>
-    </section>
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- --------------- Services ----------------------- -->
-
-    <section class="service">
-        <div class="service-container">
-            <div class="service-item">
-                <div class="service-icon">
-                 <img src="images/services/trophy 1.png" alt="quality service">
-                </div>
-                <div class="service-content">
-                    <div class="service-title">High Quality</div>
-                    <div class="service-desc">crafted from top materials</div>
-                </div>
-            </div>
-            <div class="service-item">
-                <div class="service-icon">
-                 <img src="images/services/guarantee.png" alt="guarantee service">
-                </div>
-                <div class="service-content">
-                    <div class="service-title">Warranty Protection</div>
-                    <div class="service-desc">over 2 years</div>
-                </div>
-            </div>
-            <div class="service-item">
-                <div class="service-icon">
-                 <img src="images/services/shipping.png" alt="shipping service">
-                </div>
-                <div class="service-content">
-                    <div class="service-title">Free Shipping</div>
-                    <div class="service-desc">Order over 150$</div>
-                </div>
-            </div>
-            <div class="service-item">
-                <div class="service-icon">
-                 <img src="images/services/customer-support.png" alt="customer-support service">
-                </div>
-                <div class="service-content">
-                    <div class="service-title">24 / 7 support</div>
-                    <div class="service-desc">Dedicated support</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    
-           <!-- --------------- footer ----------------------- -->
-    <footer>
-        <div class="footer-top">
-            <div class="footer-title">
-                <div class="footer-icon">Furniro.</div>
-                <div class="footer-address">
-                    400 University Drive Suite 200 Coral Gables,<br>
-                    FL 33134 USA
-                </div>
-            </div>
-            <div class="footer-links">
-                <span>Links</span>
-                <ul>
-                    <li><a href="#" class="footer-link ">Home</a></li>
-                    <li><a href="#" class="footer-link ">Shop</a></li>
-                    <li><a href="#" class="footer-link ">About</a></li>
-                    <li><a href="#" class="footer-link ">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-help">
-                <span>Help</span>
-                <ul>
-                    <li><a href="#" class="footer-link">Payment Options</a></li>
-                    <li><a href="#" class="footer-link">Returns</a></li>
-                    <li><a href="#" class="footer-link">Privacy Polices</a></li>
-
-                </ul>
-            </div>
-            <div class="footer-subscribe">
-                <span>Newsletter</span>
-                <div class="subscribe-wrapper">
-                    <input type="email" placeholder="Enter Your Email Address" class="subscribe-input">
-                    <button class="subscribe-btn">Subscribe</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <hr class="footer-divider">
-            <span>
-                2023 Furniro. All rights reserved
-            </span>
-        </div>
-    </footer>
-
-</body>
+    </div>
+    <div class="footer-bottom">
+        <hr class="footer-divider">
+        <span>2023 Furniro. All rights reserved</span>
+    </div>
+</footer>
 
 <script src="script.js"></script>
+<script src="furniro-extras.js"></script>
+</body>
 </html>

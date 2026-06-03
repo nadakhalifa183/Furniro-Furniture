@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Products — Furniro</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="output.css">
+
+    <style>
+        /* ═══════════════════════════════════════════
+           COMPARE PAGE STYLES
+        ═══════════════════════════════════════════ */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body { font-family: 'Montserrat', sans-serif; color: #3A3A3A; background: #fff; }
+
+        /* ── Layout wrapper ── */
+        .compare-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 1.5rem 80px;
+        }
+
+        /* ── Section heading ── */
+        .compare-page-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .compare-page-title .eyebrow {
+            font-size: .72rem; font-weight: 700;
+            letter-spacing: 2.5px; text-transform: uppercase;
+            color: #B88E2F; margin-bottom: .6rem;
+        }
+        .compare-page-title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 700; color: #3A3A3A;
+        }
+
+        /* ── Empty state ── */
+        #compare-empty {
+            text-align: center;
+            padding: 5rem 1rem;
+            display: none;
+        }
+        #compare-empty .empty-icon {
+            width: 88px; height: 88px;
+            border-radius: 50%; background: #F9F1E7;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        #compare-empty h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem; color: #3A3A3A; margin-bottom: .75rem;
+        }
+        #compare-empty p {
+            color: #9F9F9F; font-size: .9rem; margin-bottom: 2rem; max-width: 380px; margin-left: auto; margin-right: auto;
+        }
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: .5rem;
+            background: #B88E2F; color: #fff;
+            padding: .85rem 2rem; border-radius: 8px;
+            font-weight: 700; font-size: .9rem;
+            text-decoration: none; transition: background .2s;
+        }
+        .btn-primary:hover { background: #9A7320; }
+
+        /* ── Compare table ── */
+        #compare-table {
+            display: none;
+        }
+
+        /* Product columns header */
+        .cmp-header-row {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .cmp-product-col {
+            background: #FEFCF8;
+            border: 1.5px solid #EDE8E0;
+            border-radius: 20px;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+        }
+
+        .cmp-remove-btn {
+            position: absolute; top: 10px; right: 10px;
+            width: 28px; height: 28px; border-radius: 50%;
+            border: 1.5px solid #EDE8E0;
+            background: #fff; color: #9F9F9F;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 14px; font-weight: 700;
+            transition: background .2s, border-color .2s, color .2s;
+            z-index: 2;
+        }
+        .cmp-remove-btn:hover { background: #eb6f72; border-color: #eb6f72; color: #fff; }
+
+        .cmp-product-img {
+            width: 100%; height: 200px; object-fit: cover;
+            display: block;
+        }
+        .cmp-product-info {
+            padding: 1.25rem 1rem 1.5rem;
+        }
+        .cmp-product-category {
+            font-size: .68rem; font-weight: 700;
+            letter-spacing: 1.5px; text-transform: uppercase;
+            color: #B88E2F; margin-bottom: .35rem;
+        }
+        .cmp-product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem; font-weight: 700; color: #3A3A3A;
+            margin-bottom: .5rem; line-height: 1.3;
+        }
+        .cmp-product-stars {
+            font-size: 1rem; color: #B88E2F;
+            margin-bottom: .5rem; letter-spacing: .5px;
+        }
+        .cmp-product-price {
+            font-size: 1.15rem; font-weight: 800; color: #3A3A3A;
+        }
+        .cmp-product-original {
+            font-size: .8rem; color: #CCCCCC;
+            text-decoration: line-through; margin-left: .4rem;
+        }
+        .cmp-add-to-cart {
+            display: block;
+            width: calc(100% - 2rem);
+            margin: .75rem 1rem 1.25rem;
+            padding: .7rem;
+            background: #B88E2F; color: #fff;
+            border: none; border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: .82rem; font-weight: 700;
+            cursor: pointer; text-decoration: none;
+            transition: background .2s;
+            text-align: center;
+        }
+        .cmp-add-to-cart:hover { background: #9A7320; }
+
+        /* ── Add product placeholder col ── */
+        .cmp-add-col {
+            background: #F9F1E7;
+            border: 2px dashed #D5C4A0;
+            border-radius: 20px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            gap: 1rem; min-height: 320px; padding: 2rem;
+            text-align: center; text-decoration: none;
+            transition: border-color .2s, background .2s;
+        }
+        .cmp-add-col:hover { border-color: #B88E2F; background: #F3E9D2; }
+        .cmp-add-col .add-icon {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: rgba(184,142,47,.15);
+            display: flex; align-items: center; justify-content: center;
+            color: #B88E2F; font-size: 1.4rem;
+        }
+        .cmp-add-col span {
+            font-size: .85rem; font-weight: 700; color: #B88E2F;
+        }
+
+        /* ── Spec rows table ── */
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 16px rgba(0,0,0,.06);
+        }
+        .spec-table th,
+        .spec-table td {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-size: .88rem;
+            border-bottom: 1px solid #F4F5F7;
+        }
+        .spec-table thead tr {
+            background: #3A3A3A;
+        }
+        .spec-table thead th {
+            color: #fff; font-weight: 700;
+            font-size: .75rem; letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+        .spec-table thead th:first-child {
+            width: 180px;
+        }
+        .spec-table tbody tr:nth-child(even) { background: #F9F9F9; }
+        .spec-table tbody tr:nth-child(odd)  { background: #fff; }
+        .spec-table tbody tr:hover           { background: #F9F1E7; }
+        .spec-table .spec-label {
+            font-weight: 700; color: #666;
+            font-size: .8rem; letter-spacing: .5px;
+        }
+        .spec-table .spec-val { color: #3A3A3A; font-weight: 500; }
+        .spec-table .spec-best {
+            color: #B88E2F; font-weight: 700;
+        }
+        .spec-table .spec-badge {
+            display: inline-block;
+            background: #F9F1E7; color: #B88E2F;
+            padding: .15rem .6rem; border-radius: 20px;
+            font-size: .72rem; font-weight: 700;
+            margin-left: .4rem; vertical-align: middle;
+        }
+
+        /* ── Actions bar ── */
+        .compare-actions {
+            display: flex; gap: 1rem; justify-content: center;
+            margin-top: 3rem; flex-wrap: wrap;
+        }
+        .btn-outline {
+            display: inline-flex; align-items: center; gap: .5rem;
+            border: 1.5px solid #EDE8E0; color: #3A3A3A;
+            background: #fff; padding: .85rem 1.75rem;
+            border-radius: 8px; font-family: 'Montserrat', sans-serif;
+            font-weight: 700; font-size: .88rem;
+            text-decoration: none; cursor: pointer;
+            transition: border-color .2s, color .2s;
+        }
+        .btn-outline:hover { border-color: #B88E2F; color: #B88E2F; }
+        .btn-danger {
+            background: none; border: 1.5px solid #EDE8E0;
+            color: #9F9F9F; cursor: pointer;
+            padding: .85rem 1.75rem; border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700; font-size: .88rem;
+            transition: border-color .2s, color .2s;
+        }
+        .btn-danger:hover { border-color: #eb6f72; color: #eb6f72; }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .cmp-header-row { grid-template-columns: 1fr !important; }
+            .spec-table thead th:not(:first-child),
+            .spec-table tbody td:not(:first-child) { min-width: 140px; }
+            .spec-table { display: block; overflow-x: auto; }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════ -->
+<nav class="navbar">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
+        <a href="index.html" class="flex items-center gap-2">
+            <img src="images/logo.png" alt="Furniro logo" class="w-10 h-10 object-contain">
+            <span class="font-bold text-2xl font-montserrat">Furniro</span>
+        </a>
+        <ul class="flex items-center gap-8">
+            <li><a href="index.html"   class="nav-link">Home</a></li>
+            <li><a href="shop.html"    class="nav-link">Shop</a></li>
+            <li><a href="about.html"   class="nav-link">About</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="flex items-center gap-8">
+            <button class="icon-btn" title="account">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                          d="M20 12V7h2v6h-2m0 4h2v-2h-2m-10-2c2.67 0 8 1.34 8 4v3H2v-3
+                             c0-2.66 5.33-4 8-4m0-9a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4
+                             a4 4 0 0 1 4-4m0 10.9c-2.97 0-6.1 1.46-6.1 2.1v1.1h12.2V17
+                             c0-.64-3.13-2.1-6.1-2.1m0-9A2.1 2.1 0 0 0 7.9 8a2.1 2.1 0 0 0
+                             2.1 2.1A2.1 2.1 0 0 0 12.1 8A2.1 2.1 0 0 0 10 5.9"/>
+                </svg>
+            </button>
+            <button class="icon-btn" title="search">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round"
+                          stroke-width="2"
+                          d="m21 21l-4.486-4.494M19 10.5a8.5 8.5 0 1 1-17 0a8.5 8.5 0 0 1 17 0Z"/>
+                </svg>
+            </button>
+            <a href="cart.html" class="icon-btn relative" title="cart">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 1024 1024">
+                    <path fill="currentColor"
+                          d="M922.9 701.9H327.4l29.9-60.9l496.8-.9c16.8 0 31.2-12 34.2-28.6
+                             l68.8-385.1c1.8-10.1-.9-20.5-7.5-28.4a34.99 34.99 0 0 0-26.6-12.5
+                             l-632-2.1l-5.4-25.4c-3.4-16.2-18-28-34.6-28H96.5a35.3 35.3 0 1 0 0
+                             70.6h125.9L246 312.8l58.1 281.3l-74.8 122.1a34.96 34.96 0 0 0-3 36.8
+                             c6 11.9 18.1 19.4 31.5 19.4h62.8a102.43 102.43 0 0 0-20.6 61.7
+                             c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6
+                             c0-22.3-7.4-44-20.6-61.7h161.1a102.43 102.43 0 0 0-20.6 61.7
+                             c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6
+                             c0-22.3-7.4-44-20.6-61.7H923c19.4 0 35.3-15.8 35.3-35.3
+                             a35.42 35.42 0 0 0-35.4-35.2M305.7 253l575.8 1.9l-56.4 315.8l-452.3.8z
+                             m96.9 612.7c-17.4 0-31.6-14.2-31.6-31.6s14.2-31.6 31.6-31.6
+                             s31.6 14.2 31.6 31.6a31.6 31.6 0 0 1-31.6 31.6m325.1 0
+                             c-17.4 0-31.6-14.2-31.6-31.6s14.2-31.6 31.6-31.6s31.6 14.2
+                             31.6 31.6a31.6 31.6 0 0 1-31.6 31.6"/>
+                </svg>
+                <span id="cart-badge" class="cart-badge">0</span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     PAGE HEADER
+═══════════════════════════════════════════ -->
+<section class="page-header">
+    <div class="header-bg-container">
+        <img src="images/page-header.jpg" alt="Compare Products" class="header-bg-img">
+        <div class="header-overlay"></div>
+    </div>
+    <div class="header-content">
+        <img src="images/logo.png" alt="Logo" class="header-logo">
+        <h2 class="header-title">Compare Products</h2>
+        <div class="breadcrumb">
+            <a href="index.html" class="breadcrumb-link">Home</a>
+            <span class="breadcrumb-separator">&rsaquo;</span>
+            <span class="breadcrumb-current">Compare</span>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     COMPARE CONTENT
+═══════════════════════════════════════════ -->
+<div class="compare-wrapper">
+
+    <div class="compare-page-title">
+        <p class="eyebrow">Side-by-Side</p>
+        <h1>Product Comparison</h1>
+    </div>
+
+    <!-- Empty state -->
+    <div id="compare-empty">
+        <div class="empty-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none"
+                 stroke="#B88E2F" stroke-width="1.8" stroke-linecap="round">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3
+                         m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+            </svg>
+        </div>
+        <h2>Nothing to compare yet</h2>
+        <p>Browse our shop and click the <strong>Compare</strong> button on any
+           product to add it here. You can compare up to 3 products side-by-side.</p>
+        <a href="shop.html" class="btn-primary">Browse Products</a>
+    </div>
+
+    <!-- Comparison table — rendered by JS -->
+    <div id="compare-table">
+        <!-- Product columns injected here -->
+        <div id="compare-product-cols" class="cmp-header-row"></div>
+
+        <!-- Spec rows injected here -->
+        <div id="compare-specs"></div>
+
+        <div class="compare-actions">
+            <a href="shop.html" class="btn-outline">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                    <path d="M19 12H5M12 5l-7 7 7 7"/>
+                </svg>
+                Continue Shopping
+            </a>
+            <button class="btn-danger" id="clear-compare-btn">
+                Clear All Comparisons
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SERVICES
+═══════════════════════════════════════════ -->
+<section class="service">
+    <div class="service-container">
+        <div class="service-item">
+            <div class="service-icon">
+                <img src="images/services/trophy 1.png" alt="High Quality">
+            </div>
+            <div class="service-content">
+                <div class="service-title">High Quality</div>
+                <div class="service-desc">crafted from top materials</div>
+            </div>
+        </div>
+        <div class="service-item">
+            <div class="service-icon">
+                <img src="images/services/guarantee.png" alt="Warranty">
+            </div>
+            <div class="service-content">
+                <div class="service-title">Warranty Protection</div>
+                <div class="service-desc">over 2 years</div>
+            </div>
+        </div>
+        <div class="service-item">
+            <div class="service-icon">
+                <img src="images/services/shipping.png" alt="Shipping">
+            </div>
+            <div class="service-content">
+                <div class="service-title">Free Shipping</div>
+                <div class="service-desc">Order over 150$</div>
+            </div>
+        </div>
+        <div class="service-item">
+            <div class="service-icon">
+                <img src="images/services/customer-support.png" alt="Support">
+            </div>
+            <div class="service-content">
+                <div class="service-title">24 / 7 Support</div>
+                <div class="service-desc">Dedicated support</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<hr>
+<footer>
+    <div class="footer-top">
+        <div class="footer-title">
+            <div class="footer-icon">Furniro.</div>
+            <div class="footer-address">
+                400 University Drive Suite 200 Coral Gables,<br>
+                FL 33134 USA
+            </div>
+        </div>
+        <div class="footer-links">
+            <span>Links</span>
+            <ul>
+                <li><a href="index.html"   class="footer-link">Home</a></li>
+                <li><a href="shop.html"    class="footer-link">Shop</a></li>
+                <li><a href="about.html"   class="footer-link">About</a></li>
+                <li><a href="contact.html" class="footer-link">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-help">
+            <span>Help</span>
+            <ul>
+                <li><a href="#" class="footer-link">Payment Options</a></li>
+                <li><a href="#" class="footer-link">Returns</a></li>
+                <li><a href="#" class="footer-link">Privacy Policies</a></li>
+            </ul>
+        </div>
+        <div class="footer-subscribe">
+            <span>Newsletter</span>
+            <div class="subscribe-wrapper">
+                <input type="email" placeholder="Enter Your Email Address"
+                       class="subscribe-input">
+                <button class="subscribe-btn">Subscribe</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <hr class="footer-divider">
+        <span>2023 Furniro. All rights reserved</span>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="furniro-extras.js"></script>
+
+<!-- ═══════════════════════════════════════════
+     COMPARE PAGE LOGIC
+═══════════════════════════════════════════ -->
+<script>
+(function () {
+    'use strict';
+
+    const COMPARE_KEY = 'furniroCompare';
+    const SPECS = [
+        { key: 'category',    label: 'Category',    format: v => v ? v.charAt(0).toUpperCase() + v.slice(1) : '—' },
+        { key: 'price',       label: 'Price',        format: v => 'Rp\u00a0' + Number(v).toLocaleString('id-ID'), best: 'low' },
+        { key: 'rating',      label: 'Rating',       format: v => renderStars(v) + ` <span style="font-size:.75rem;color:#9F9F9F;">(${v}/5)</span>`, best: 'high' },
+        { key: 'discount',    label: 'Discount',     format: v => v > 0 ? `<span style="color:#eb6f72;font-weight:700;">−${v}%</span>` : '<span style="color:#9F9F9F;">No discount</span>' },
+        { key: 'isNew',       label: 'Availability', format: v => v ? '<span style="color:#27ae60;font-weight:700;">✓ New Arrival</span>' : '<span style="color:#9F9F9F;">Standard</span>' },
+        { key: 'warranty',    label: 'Warranty',     format: v => v || '2 Years' },
+        { key: 'material',    label: 'Material',     format: v => v || 'Premium Wood & Metal' },
+        { key: 'dimensions',  label: 'Dimensions',   format: v => v || 'W80 × D60 × H75 cm' },
+        { key: 'description', label: 'Description',  format: v => `<span style="font-size:.82rem;line-height:1.65;color:#666;">${v || '—'}</span>` },
+    ];
+
+    function renderStars(rating) {
+        const full  = Math.floor(rating);
+        const empty = 5 - full;
+        return `<span style="color:#B88E2F">${'★'.repeat(full)}</span>`
+             + `<span style="color:#D9D9D9">${'☆'.repeat(empty)}</span>`;
+    }
+
+    function fmtPrice(p) {
+        return 'Rp\u00a0' + Number(p).toLocaleString('id-ID');
+    }
+
+    function getList() {
+        try { return JSON.parse(localStorage.getItem(COMPARE_KEY)) || []; }
+        catch { return []; }
+    }
+
+    function saveList(ids) {
+        localStorage.setItem(COMPARE_KEY, JSON.stringify(ids));
+    }
+
+    function removeFromCompare(id) {
+        const list = getList().filter(i => Number(i) !== Number(id));
+        saveList(list);
+        render();
+    }
+
+    function clearAll() {
+        saveList([]);
+        render();
+    }
+
+    async function fetchProducts() {
+        const res  = await fetch('products.json');
+        const data = await res.json();
+        return data.products || [];
+    }
+
+    async function render() {
+        const list = getList().map(Number);
+        const emptyEl  = document.getElementById('compare-empty');
+        const tableEl  = document.getElementById('compare-table');
+        const colsEl   = document.getElementById('compare-product-cols');
+        const specsEl  = document.getElementById('compare-specs');
+
+        if (!list.length) {
+            emptyEl.style.display  = 'block';
+            tableEl.style.display  = 'none';
+            return;
+        }
+
+        emptyEl.style.display = 'none';
+        tableEl.style.display = 'block';
+
+        const allProducts = await fetchProducts();
+        const products    = list.map(id => allProducts.find(p => Number(p.id) === id)).filter(Boolean);
+
+        /* ── Column count (products + optional "add" slot) ── */
+        const showAddSlot = products.length < 3;
+        const totalCols   = products.length + (showAddSlot ? 1 : 0);
+
+        colsEl.style.gridTemplateColumns = `repeat(${totalCols}, 1fr)`;
+
+        /* ── Product columns ── */
+        const colsHTML = products.map(p => {
+            const hasDiscount = p.discount > 0;
+            return `
+                <div class="cmp-product-col">
+                    <button class="cmp-remove-btn"
+                            onclick="removeFromComparePage(${p.id})"
+                            title="Remove ${p.name}">&#215;</button>
+                    <a href="product.html?id=${p.id}">
+                        <img src="${p.image}" alt="${p.name}" class="cmp-product-img"
+                             onerror="this.src='https://via.placeholder.com/400x200/F4F0E8/9A8E7C?text=No+Image'">
+                    </a>
+                    <div class="cmp-product-info">
+                        <p class="cmp-product-category">${p.category || 'Furniture'}</p>
+                        <p class="cmp-product-name">
+                            <a href="product.html?id=${p.id}"
+                               style="text-decoration:none;color:inherit;">${p.name}</a>
+                        </p>
+                        <div class="cmp-product-stars">${renderStars(p.rating)}</div>
+                        <p class="cmp-product-price">
+                            ${fmtPrice(p.price)}
+                            ${hasDiscount ? `<span class="cmp-product-original">${fmtPrice(p.originalPrice)}</span>` : ''}
+                        </p>
+                    </div>
+                    <a href="product.html?id=${p.id}" class="cmp-add-to-cart">
+                        View &amp; Add to Cart
+                    </a>
+                </div>`;
+        }).join('');
+
+        /* ── Add product slot ── */
+        const addSlot = showAddSlot ? `
+            <a href="shop.html" class="cmp-add-col">
+                <div class="add-icon">
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                <span>Add Product</span>
+            </a>` : '';
+
+        colsEl.innerHTML = colsHTML + addSlot;
+
+        /* ── Spec table ── */
+        // Build header: label col + one col per product
+        const thCols = products.map(p =>
+            `<th>${p.name.length > 22 ? p.name.slice(0, 22) + '…' : p.name}</th>`
+        ).join('');
+
+        // For numeric specs, find best value
+        function findBest(spec, prods) {
+            if (!spec.best) return null;
+            const vals = prods.map(p => Number(p[spec.key]) || 0);
+            return spec.best === 'high' ? Math.max(...vals) : Math.min(...vals);
+        }
+
+        const rows = SPECS.map(spec => {
+            const best = findBest(spec, products);
+            const tds  = products.map(p => {
+                const raw  = p[spec.key];
+                const val  = Number(raw);
+                const isBest = best !== null && val === best && products.length > 1;
+                const cell = spec.format(raw);
+                const badge = isBest ? '<span class="spec-badge">Best</span>' : '';
+                return `<td class="spec-val ${isBest ? 'spec-best' : ''}">${cell}${badge}</td>`;
+            }).join('');
+
+            return `
+                <tr>
+                    <td class="spec-label">${spec.label}</td>
+                    ${tds}
+                </tr>`;
+        }).join('');
+
+        specsEl.innerHTML = `
+            <table class="spec-table">
+                <thead>
+                    <tr>
+                        <th>Specification</th>
+                        ${thCols}
+                    </tr>
+                </thead>
+                <tbody>${rows}</tbody>
+            </table>`;
+    }
+
+    /* Exposed globally so onclick in injected HTML works */
+    window.removeFromComparePage = removeFromCompare;
+
+    document.getElementById('clear-compare-btn')
+        .addEventListener('click', clearAll);
+
+    /* Boot */
+    document.addEventListener('DOMContentLoaded', render);
+
+})();
+</script>
+
+</body>
+</html>

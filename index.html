@@ -45,7 +45,7 @@
                             d="m21 21l-4.486-4.494M19 10.5a8.5 8.5 0 1 1-17 0a8.5 8.5 0 0 1 17 0Z" />
                     </svg>
                 </button>
-                <button class="icon-btn relative" title="cart">
+                <a href="cart.html" class="icon-btn relative" title="cart">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 1024 1024">
                         <path fill="currentColor"
                             d="M922.9 701.9H327.4l29.9-60.9l496.8-.9c16.8 0 31.2-12 34.2-28.6l68.8-385.1c1.8-10.1-.9-20.5-7.5-28.4a34.99 34.99 
@@ -53,9 +53,8 @@
                          102.43 0 0 0-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7h161.1a102.43 102.43 0 0 0-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7H923c19.4 0 35.3-15.8 35.3-35.3a35.42 35.42 0 0 0-35.4-35.2M305.7 253l575.8
                           1.9l-56.4 315.8l-452.3.8zm96.9 612.7c-17.4 0-31.6-14.2-31.6-31.6s14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 0 1-31.6 31.6m325.1 0c-17.4 0-31.6-14.2-31.6-31.6s14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 0 1-31.6 31.6" />
                     </svg>
-                    <span
-                        class="cart-badge">3</span>
-                </button>
+                    <span id="cart-badge" class="cart-badge">0</span>
+                </a>
             </div>
         </div>
     </nav>
@@ -83,18 +82,18 @@
             <p class="category-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
         </div>
         <div class="category-box">
-            <div class="category-item">
-                <img src="images/category1.png" alt="Dinning">
-                <span>Dinning</span>
-            </div>
-            <div class="category-item">
+            <a href="shop.html?category=dining" class="category-item">
+                <img src="images/category1.png" alt="Dining">
+                <span>Dining</span>
+            </a>
+            <a href="shop.html?category=living" class="category-item">
                 <img src="images/category2.png" alt="Living">
                 <span>Living</span>
-            </div>
-            <div class="category-item">
+            </a>
+            <a href="shop.html?category=bedroom" class="category-item">
                 <img src="images/category3.png" alt="Bedroom">
                 <span>Bedroom</span>
-            </div>
+            </a>
         </div>
     </section>
 
@@ -249,6 +248,7 @@
 </body>
 
 <script src="script.js"></script>
+<script src="furniro-extras.js"></script>
 </html>
 
 <!-- npx tailwindcss -i ./style.css -o ./output.css --watch -->

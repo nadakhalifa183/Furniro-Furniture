@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product - Furniro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="output.css">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+
+        .thumb-img { transition: all .25s; }
+        .thumb-img.active,
+        .thumb-img:hover { border-color: #B88E2F; opacity: 1; }
+        .thumb-img:not(.active) { opacity: .65; }
+
+        .size-btn { transition: all .2s; border: 1px solid #D9D9D9; }
+        .size-btn.active,
+        .size-btn:hover { background: #B88E2F; color: #fff; border-color: #B88E2F; }
+
+        .color-dot { transition: transform .2s, box-shadow .2s; cursor: pointer; }
+        .color-dot.active,
+        .color-dot:hover { transform: scale(1.15); box-shadow: 0 0 0 3px #fff, 0 0 0 5px #B88E2F; }
+
+        .qty-btn { transition: background .15s; }
+        .qty-btn:hover { background: #B88E2F; color: #fff; }
+
+        .tab-btn { transition: all .2s; border-bottom: 2px solid transparent; }
+        .tab-btn.active { border-bottom-color: #3A3A3A; color: #3A3A3A; font-weight: 600; }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .main-img { transition: opacity .3s; }
+        .main-img.fade { opacity: 0; }
+
+        .star-filled { color: #FFC700; }
+        .star-empty  { color: #D9D9D9; }
+
+        .related-card { transition: box-shadow .3s; }
+        .related-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.1); }
+        .related-card:hover .related-img { transform: scale(1.05); }
+        .related-img { transition: transform .5s; }
+
+        .breadcrumb-sep { color: #9F9F9F; }
+
+        .add-btn { transition: background .2s, transform .1s; }
+        .add-btn:active { transform: scale(.97); }
+
+        .toast {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
+            background: #3A3A3A; color: #fff;
+            padding: .75rem 1.5rem; border-radius: 8px;
+            font-size: .875rem; font-family: 'Poppins', sans-serif;
+            opacity: 0; transform: translateY(12px);
+            transition: opacity .3s, transform .3s;
+            pointer-events: none;
+        }
+        .toast.show { opacity: 1; transform: translateY(0); }
+
+        .font-heading { font-family: 'Playfair Display', serif; }
+    </style>
+</head>
+<body class="bg-white">
+
+<!-- NAV -->
+<nav class="navbar">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
+        <a href="index.html" class="flex items-center gap-2">
+            <img src="images/logo.png" alt="logo-icon" class="w-10 h-10 object-contain">
+            <span class="font-bold text-2xl font-montserrat">Furniro</span>
+        </a>
+        <ul class="flex items-center gap-8">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="shop.html" class="nav-link">Shop</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="flex items-center gap-8">
+            <button class="icon-btn" title="account">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M20 12V7h2v6h-2m0 4h2v-2h-2m-10-2c2.67 0 8 1.34 8 4v3H2v-3c0-2.66 5.33-4 8-4m0-9a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10.9c-2.97 0-6.1 1.46-6.1 2.1v1.1h12.2V17c0-.64-3.13-2.1-6.1-2.1m0-9A2.1 2.1 0 0 0 7.9 8a2.1 2.1 0 0 0 2.1 2.1A2.1 2.1 0 0 0 12.1 8A2.1 2.1 0 0 0 10 5.9"/>
+                </svg>
+            </button>
+            <button class="icon-btn" title="search">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21l-4.486-4.494M19 10.5a8.5 8.5 0 1 1-17 0a8.5 8.5 0 0 1 17 0Z"/>
+                </svg>
+            </button>
+            <a href="cart.html" class="icon-btn relative" title="cart">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 1024 1024">
+                    <path fill="currentColor" d="M922.9 701.9H327.4l29.9-60.9l496.8-.9c16.8 0 31.2-12 34.2-28.6l68.8-385.1c1.8-10.1-.9-20.5-7.5-28.4a34.99 34.99 0 0 0-26.6-12.5l-632-2.1l-5.4-25.4c-3.4-16.2-18-28-34.6-28H96.5a35.3 35.3 0 1 0 0 70.6h125.9L246 312.8l58.1 281.3l-74.8 122.1a34.96 34.96 0 0 0-3 36.8c6 11.9 18.1 19.4 31.5 19.4h62.8a102.43 102.43 0 0 0-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7h161.1a102.43 102.43 0 0 0-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7H923c19.4 0 35.3-15.8 35.3-35.3a35.42 35.42 0 0 0-35.4-35.2M305.7 253l575.8 1.9l-56.4 315.8l-452.3.8zm96.9 612.7c-17.4 0-31.6-14.2-31.6-31.6s14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 0 1-31.6 31.6m325.1 0c-17.4 0-31.6-14.2-31.6-31.6s14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 0 1-31.6 31.6"/>
+                </svg>
+                <span class="cart-badge" id="cart-badge">0</span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="bg-primary-beige py-4">
+  <div class="max-w-7xl mx-auto px-6 flex items-center gap-2 text-sm">
+    <a href="index.html" class="text-primary-grey-light-pro hover:text-primary transition-colors">Home</a>
+    <span class="breadcrumb-sep"><i class="fa-solid fa-chevron-right text-xs"></i></span>
+    <a href="shop.html" class="text-primary-grey-light-pro hover:text-primary transition-colors">Shop</a>
+    <span class="breadcrumb-sep"><i class="fa-solid fa-chevron-right text-xs"></i></span>
+    <span class="text-primary-grey font-medium" id="breadcrumb-name">Product</span>
+  </div>
+</div>
+
+<!-- PRODUCT SECTION -->
+<section class="max-w-7xl mx-auto px-6 py-12">
+  <div class="flex flex-col lg:flex-row gap-12 xl:gap-20">
+
+    <!-- LEFT: Images -->
+    <div class="flex flex-col-reverse sm:flex-row gap-4 lg:w-[55%]">
+      <!-- Thumbnails -->
+      <div class="flex sm:flex-col gap-3 overflow-x-auto sm:overflow-visible">
+        <div id="thumbs" class="flex sm:flex-col gap-3"></div>
+      </div>
+      <!-- Main image -->
+      <div class="flex-1 bg-primary-beige rounded-2xl overflow-hidden flex items-center justify-center min-h-[380px] sm:min-h-[480px]">
+        <img id="main-img" src="" alt="Product" class="main-img w-full h-full object-cover rounded-2xl">
+      </div>
+    </div>
+
+    <!-- RIGHT: Details -->
+    <div class="lg:w-[45%] flex flex-col gap-5">
+      <div>
+        <h1 id="product-title" class="font-heading text-3xl xl:text-4xl font-semibold text-primary-grey leading-tight"></h1>
+        <p id="product-price" class="text-primary text-2xl font-semibold mt-2"></p>
+      </div>
+
+      <!-- Rating -->
+      <div class="flex items-center gap-3">
+        <div id="stars" class="flex gap-0.5 text-sm"></div>
+        <span class="text-primary-grey-light-pro text-sm">|</span>
+        <span id="review-count" class="text-primary-grey-light-pro text-sm"></span>
+      </div>
+
+      <p id="product-desc" class="text-primary-grey-light text-sm leading-relaxed"></p>
+
+      <!-- Size -->
+      <div>
+        <p class="text-primary-grey-light-pro text-sm mb-3">Size</p>
+        <div id="sizes" class="flex gap-3 flex-wrap"></div>
+      </div>
+
+      <!-- Color -->
+      <div id="color-section">
+        <p class="text-primary-grey-light-pro text-sm mb-3">Color</p>
+        <div id="colors" class="flex gap-3"></div>
+      </div>
+
+      <!-- Qty + Buttons -->
+      <div class="flex flex-wrap gap-3 mt-2">
+        <div class="flex items-center border border-gray-300 rounded-xl overflow-hidden">
+          <button class="qty-btn w-11 h-12 flex items-center justify-center text-primary-grey font-bold text-lg" onclick="changeQty(-1)">−</button>
+          <span id="qty" class="w-10 text-center font-medium text-primary-grey bg-white">1</span>
+          <button class="qty-btn w-11 h-12 flex items-center justify-center text-primary-grey font-bold text-lg" onclick="changeQty(1)">+</button>
+        </div>
+        <button id="add-to-cart-btn" class="add-btn flex-1 min-w-[160px] bg-primary hover:opacity-90 text-white font-semibold text-sm py-3 px-6 rounded-xl flex items-center justify-center gap-2">
+          <i class="fa-solid fa-cart-shopping"></i>
+          Add To Cart
+        </button>
+        <button class="border border-primary-grey text-primary-grey hover:bg-primary-grey hover:text-white transition-colors font-semibold text-sm py-3 px-5 rounded-xl flex items-center justify-center gap-2">
+          <i class="fa-solid fa-plus text-xs"></i> Compare
+        </button>
+      </div>
+
+      <!-- Meta -->
+      <div class="border-t border-gray-200 pt-5 flex flex-col gap-2 text-sm">
+        <div class="flex gap-2"><span class="text-primary-grey-light-pro w-20">SKU</span><span class="text-primary-grey-light" id="meta-sku"></span></div>
+        <div class="flex gap-2"><span class="text-primary-grey-light-pro w-20">Category</span><span class="text-primary-grey-light capitalize" id="meta-cat"></span></div>
+        <div class="flex gap-2"><span class="text-primary-grey-light-pro w-20">Tags</span><span class="text-primary-grey-light" id="meta-tags"></span></div>
+        <div class="flex items-center gap-2 mt-1">
+          <span class="text-primary-grey-light-pro w-20">Share</span>
+          <div class="flex gap-3">
+            <a href="#" class="text-primary-grey hover:text-primary transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="text-primary-grey hover:text-primary transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="text-primary-grey hover:text-primary transition-colors"><i class="fa-brands fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TABS -->
+<section class="border-t border-gray-200 max-w-7xl mx-auto px-6 pb-16">
+  <div class="flex gap-8 pt-6 border-b border-gray-200 mb-8">
+    <button class="tab-btn active pb-3 text-sm font-medium text-primary-grey-light hover:text-primary-grey" onclick="switchTab(this,'desc-tab')">Description</button>
+    <button class="tab-btn pb-3 text-sm font-medium text-primary-grey-light hover:text-primary-grey" onclick="switchTab(this,'info-tab')">Additional Information</button>
+    <button class="tab-btn pb-3 text-sm font-medium text-primary-grey-light hover:text-primary-grey" onclick="switchTab(this,'reviews-tab')">Reviews [<span id="review-count-tab">0</span>]</button>
+  </div>
+  <div id="desc-tab" class="tab-content active max-w-3xl">
+    <p id="tab-description" class="text-primary-grey-light text-sm leading-relaxed mb-4"></p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+      <div class="bg-primary-beige rounded-xl overflow-hidden aspect-video flex items-center justify-center">
+        <img id="tab-img-1" src="" alt="" class="w-full h-full object-cover rounded-xl">
+      </div>
+      <div class="bg-primary-beige rounded-xl overflow-hidden aspect-video flex items-center justify-center">
+        <img id="tab-img-2" src="" alt="" class="w-full h-full object-cover rounded-xl">
+      </div>
+    </div>
+  </div>
+  <div id="info-tab" class="tab-content max-w-xl">
+    <table class="w-full text-sm text-primary-grey-light border-collapse">
+      <tr class="border-b border-gray-200"><td class="py-3 font-medium text-primary-grey w-40">Weight</td><td class="py-3" id="info-weight">7 kg</td></tr>
+      <tr class="border-b border-gray-200"><td class="py-3 font-medium text-primary-grey">Dimensions</td><td class="py-3" id="info-dimensions">200 × 85 × 80 cm</td></tr>
+      <tr class="border-b border-gray-200"><td class="py-3 font-medium text-primary-grey">Material</td><td class="py-3" id="info-material">Teak wood, Linen fabric</td></tr>
+      <tr><td class="py-3 font-medium text-primary-grey">Colors</td><td class="py-3" id="info-colors">Purple, Black, Gold</td></tr>
+    </table>
+  </div>
+  <div id="reviews-tab" class="tab-content max-w-2xl">
+    <p class="text-sm text-primary-grey-light mb-6"><span id="total-reviews">0</span> Customer Reviews</p>
+    <div id="reviews-list" class="flex flex-col gap-6"></div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="border-t border-gray-200"></div>
+
+<!-- RELATED PRODUCTS -->
+<section class="max-w-7xl mx-auto px-6 py-16">
+  <h2 class="font-heading text-3xl font-semibold text-primary-grey text-center mb-10">Related Products</h2>
+  <div id="related-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7"></div>
+  <div class="flex justify-center mt-10">
+    <a href="shop.html" class="border border-primary text-primary hover:bg-primary hover:text-white transition-colors font-semibold text-sm px-12 py-3 rounded-sm">Show More</a>
+  </div>
+</section>
+
+<!-- SERVICE STRIP -->
+<section class="bg-primary-beige py-10 border-t border-gray-200">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
+    <div><i class="fa-solid fa-trophy text-2xl text-primary-grey mb-2"></i><p class="font-semibold text-primary-grey text-sm">High Quality</p><p class="text-primary-grey-light-pro text-xs mt-1">crafted from top materials</p></div>
+    <div><i class="fa-solid fa-shield-halved text-2xl text-primary-grey mb-2"></i><p class="font-semibold text-primary-grey text-sm">Warranty Protection</p><p class="text-primary-grey-light-pro text-xs mt-1">Over 2 years</p></div>
+    <div><i class="fa-solid fa-truck-fast text-2xl text-primary-grey mb-2"></i><p class="font-semibold text-primary-grey text-sm">Free Shipping</p><p class="text-primary-grey-light-pro text-xs mt-1">Order over $150</p></div>
+    <div><i class="fa-regular fa-circle-check text-2xl text-primary-grey mb-2"></i><p class="font-semibold text-primary-grey text-sm">24/7 Support</p><p class="text-primary-grey-light-pro text-xs mt-1">Dedicated support</p></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-title">
+      <div class="footer-icon">Furniro.</div>
+      <div class="footer-address">400 University Drive Suite 200 Coral Gables,<br>FL 33134 USA</div>
+    </div>
+    <div class="footer-links">
+      <span>Links</span>
+      <ul>
+        <li><a href="index.html" class="footer-link">Home</a></li>
+        <li><a href="shop.html" class="footer-link">Shop</a></li>
+        <li><a href="about.html" class="footer-link">About</a></li>
+        <li><a href="contact.html" class="footer-link">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-help">
+      <span>Help</span>
+      <ul>
+        <li><a href="#" class="footer-link">Payment Options</a></li>
+        <li><a href="#" class="footer-link">Returns</a></li>
+        <li><a href="#" class="footer-link">Privacy Polices</a></li>
+      </ul>
+    </div>
+    <div class="footer-subscribe">
+      <span>Newsletter</span>
+      <div class="subscribe-wrapper">
+        <input type="email" placeholder="Enter Your Email Address" class="subscribe-input">
+        <button class="subscribe-btn">Subscribe</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <hr class="footer-divider">
+    <span>2023 Furniro. All rights reserved</span>
+  </div>
+</footer>
+
+<div id="toast" class="toast"><i class="fa-solid fa-check mr-2"></i><span id="toast-msg"></span></div>
+<script src="furniro-extras.js"></script>
+<script>
+let currentProduct = null;
+let qty = 1;
+let selectedSize = null;
+let selectedColor = null;
+let cart = [];
+
+function fmt(n){ return 'Rp ' + n.toLocaleString(); }
+
+function getProductIdFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return parseInt(urlParams.get('id'));
+}
+
+function initCart() {
+    const savedCart = localStorage.getItem('furniroCart');
+    if (savedCart) {
+        cart = JSON.parse(savedCart);
+    }
+    updateCartBadge();
+}
+
+function saveCart() {
+    localStorage.setItem('furniroCart', JSON.stringify(cart));
+}
+
+function updateCartBadge() {
+    const cartBadge = document.getElementById('cart-badge');
+    if (cartBadge) {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartBadge.textContent = totalItems;
+    }
+}
+
+function addToCartFromProduct() {
+    if (!currentProduct) return;
+    
+    const existingItem = cart.find(item => item.id === currentProduct.id);
+    if (existingItem) {
+        existingItem.quantity += qty;
+    } else {
+        cart.push({ id: currentProduct.id, quantity: qty });
+    }
+    saveCart();
+    updateCartBadge();
+    showToast(`Added ${qty}× ${currentProduct.name} to cart`);
+}
+
+function showToast(msg){
+    const t = document.getElementById('toast');
+    document.getElementById('toast-msg').textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function changeQty(delta){
+    qty = Math.max(1, qty + delta);
+    document.getElementById('qty').textContent = qty;
+}
+
+function switchImage(src, thumbEl){
+    const mainImg = document.getElementById('main-img');
+    mainImg.classList.add('fade');
+    setTimeout(() => {
+        mainImg.src = src;
+        mainImg.classList.remove('fade');
+    }, 200);
+    document.querySelectorAll('.thumb-img').forEach(t => {
+        t.classList.remove('active');
+        t.style.borderColor = 'transparent';
+    });
+    thumbEl.classList.add('active');
+    thumbEl.style.borderColor = '#B88E2F';
+}
+
+function switchTab(btn, tabId){
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+}
+
+function renderProduct(product) {
+    currentProduct = product;
+    
+    document.getElementById('breadcrumb-name').textContent = product.name;
+    document.getElementById('product-title').textContent = product.name;
+    document.getElementById('product-price').textContent = fmt(product.price);
+    document.getElementById('product-desc').textContent = product.description;
+    document.getElementById('tab-description').textContent = product.description;
+    document.getElementById('meta-sku').textContent = product.sku || 'N/A';
+    document.getElementById('meta-cat').textContent = product.category || 'Furniture';
+    document.getElementById('meta-tags').textContent = product.tags ? product.tags.slice(0, 4).join(', ') : 'Furniture, Home, Shop';
+    document.title = `${product.name} — Furniro`;
+
+    // Review count
+    document.getElementById('review-count').textContent = product.reviews + ' Customer Review' + (product.reviews !== 1 ? 's' : '');
+    document.getElementById('review-count-tab').textContent = product.reviews;
+    document.getElementById('total-reviews').textContent = product.reviews;
+
+    // Tab images
+    if (product.images && product.images.length >= 2) {
+        document.getElementById('tab-img-1').src = product.images[0];
+        document.getElementById('tab-img-2').src = product.images[1];
+    } else {
+        document.getElementById('tab-img-1').src = product.image;
+        document.getElementById('tab-img-2').src = product.image;
+    }
+
+    // Info tab
+    if (product.dimensions) {
+        document.getElementById('info-dimensions').textContent = 
+            `${product.dimensions.width} × ${product.dimensions.height} × ${product.dimensions.depth} ${product.dimensions.unit || 'cm'}`;
+    }
+    if (product.material) {
+        document.getElementById('info-material').textContent = product.material;
+    }
+
+    // Stars
+    const starsEl = document.getElementById('stars');
+    starsEl.innerHTML = '';
+    const full = Math.floor(product.rating);
+    const half = product.rating % 1 >= 0.5;
+    for(let i = 0; i < 5; i++){
+        let starClass = 'fa-regular fa-star star-empty text-sm';
+        if(i < full) {
+            starClass = 'fa-solid fa-star star-filled text-sm';
+        } else if(i === full && half) {
+            starClass = 'fa-solid fa-star-half-stroke star-filled text-sm';
+        }
+        const s = document.createElement('i');
+        s.className = starClass;
+        starsEl.appendChild(s);
+    }
+
+    // Thumbnails
+    const thumbsEl = document.getElementById('thumbs');
+    thumbsEl.innerHTML = '';
+    const images = product.images && product.images.length > 0 ? product.images : [product.image];
+    
+    images.forEach((src, i) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'thumb-img ' + (i === 0 ? 'active' : '') + ' w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border-2 cursor-pointer flex-shrink-0';
+        wrap.style.borderColor = i === 0 ? '#B88E2F' : 'transparent';
+        wrap.innerHTML = `<img src="${src}" class="w-full h-full object-cover">`;
+        wrap.onclick = () => switchImage(src, wrap);
+        thumbsEl.appendChild(wrap);
+    });
+    document.getElementById('main-img').src = images[0];
+
+    // Sizes
+    const sizesEl = document.getElementById('sizes');
+    sizesEl.innerHTML = '';
+    const sizes = product.sizes || ['S', 'M', 'L', 'XL'];
+    selectedSize = sizes[0];
+    
+    sizes.forEach(s => {
+        const btn = document.createElement('button');
+        btn.className = 'size-btn ' + (s === selectedSize ? 'active' : '') + ' w-12 h-10 rounded-lg text-sm font-medium';
+        btn.textContent = s;
+        btn.onclick = () => {
+            selectedSize = s;
+            document.querySelectorAll('.size-btn').forEach(b => {
+                b.classList.toggle('active', b.textContent === s);
+            });
+        };
+        sizesEl.appendChild(btn);
+    });
+
+    // Colors
+    const colorsEl = document.getElementById('colors');
+    colorsEl.innerHTML = '';
+    const colors = product.colors || [{name: 'Brown', hex: '#8B4513'}];
+    selectedColor = colors[0].name;
+    
+    if (colors.length > 1 || (colors.length === 1 && colors[0].name !== 'Brown')) {
+        colors.forEach(c => {
+            const dot = document.createElement('button');
+            dot.className = 'color-dot w-8 h-8 rounded-full';
+            dot.style.background = c.hex || '#8B4513';
+            dot.title = c.name;
+            dot.onclick = () => {
+                selectedColor = c.name;
+                document.querySelectorAll('.color-dot').forEach(d => d.classList.toggle('active', d.title === c.name));
+            };
+            colorsEl.appendChild(dot);
+        });
+    } else {
+        document.getElementById('color-section').style.display = 'none';
+    }
+}
+
+function renderRelatedProducts(allProducts, currentProduct) {
+    const grid = document.getElementById('related-grid');
+    grid.innerHTML = '';
+    
+    const related = allProducts
+        .filter(p => p.category === currentProduct.category && p.id !== currentProduct.id)
+        .slice(0, 4);
+    
+    if (related.length === 0) {
+        grid.innerHTML = '<p class="col-span-4 text-center text-primary-grey-light py-8">No related products found.</p>';
+        return;
+    }
+
+    related.forEach(p => {
+        const stars = '★'.repeat(Math.floor(p.rating)) + '☆'.repeat(5 - Math.floor(p.rating));
+        grid.innerHTML += `
+            <div class="related-card bg-primary-beige rounded-2xl overflow-hidden cursor-pointer" onclick="window.location.href='product.html?id=${p.id}'">
+                <div class="relative overflow-hidden aspect-square">
+                    <img src="${p.image}" alt="${p.name}" class="related-img w-full h-full object-cover">
+                    ${p.isNew ? '<span class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-2.5 py-1 rounded-full">New</span>' : ''}
+                    ${p.discount > 0 ? '<span class="absolute top-3 left-3 bg-primary-red text-white text-xs font-bold px-2.5 py-1 rounded-full">-' + p.discount + '%</span>' : ''}
+                </div>
+                <div class="p-4">
+                    <h3 class="font-heading font-semibold text-primary-grey text-base">${p.name}</h3>
+                    <p class="text-primary-grey-light-pro text-sm mt-0.5 capitalize">${p.category}</p>
+                    <div class="flex items-center gap-3 mt-2">
+                        <span class="font-semibold text-primary-grey">Rp ${p.price.toLocaleString()}</span>
+                        ${p.discount > 0 ? `<span class="text-primary-grey-light-pro text-sm line-through">Rp ${p.originalPrice.toLocaleString()}</span>` : ''}
+                    </div>
+                    <div class="text-yellow-400 text-sm mt-2">${stars}</div>
+                </div>
+            </div>`;
+    });
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+    initCart();
+    
+    const addToCartBtn = document.getElementById('add-to-cart-btn');
+    if (addToCartBtn) {
+        addToCartBtn.addEventListener('click', addToCartFromProduct);
+    }
+
+    // Load products and render
+    fetch('products.json')
+        .then(res => res.json())
+        .then(data => {
+            const productId = getProductIdFromUrl();
+            const product = data.products.find(p => p.id === productId);
+            
+            if (product) {
+                renderProduct(product);
+                renderRelatedProducts(data.products, product);
+            } else {
+                document.getElementById('product-title').textContent = 'Product Not Found';
+                document.getElementById('product-desc').textContent = 'The product you are looking for does not exist.';
+            }
+        })
+        .catch(err => console.error('Error loading product:', err));
+});
+</script>
+</body>
+</html>

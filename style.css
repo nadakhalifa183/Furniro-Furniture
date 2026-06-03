@@ -41,31 +41,32 @@
         z-index: 50;
         transition: transform 0.3s ease, opacity 0.3s ease;
     }
-    
+
     .navbar.hidden-nav {
         transform: translateY(-100%);
         opacity: 0;
         pointer-events: none;
     }
+
     .nav-link {
         @apply font-medium text-gray-500 transition-all duration-300 relative pb-1;
     }
-    
+
     .nav-link::after {
         content: '';
         @apply absolute bottom-0 left-0 h-[2px] bg-amber-700 transition-all duration-300;
         width: 0;
     }
-    
+
     .nav-link:hover {
         @apply text-gray-900;
     }
-    
+
     .nav-link:hover::after {
         width: 100%;
     }
-    
-    
+
+
     /* .active-link {
         @apply text-gray-900 font-semibold;
     }
@@ -75,14 +76,11 @@
     }
      */
     .icon-btn {
-        @apply text-gray-500 hover:text-gray-900 transition-colors
-               duration-200 cursor-pointer p-1.5 rounded-full hover:bg-gray-100;
+        @apply text-gray-500 hover:text-gray-900 transition-colors duration-200 cursor-pointer p-1.5 rounded-full hover:bg-gray-100;
     }
-    
+
     .cart-badge {
-        @apply absolute -top-1.5 -right-1.5 bg-amber-700 text-white
-               text-[10px] font-bold w-4 h-4 rounded-full
-               flex items-center justify-center;
+        @apply absolute -top-1.5 -right-1.5 bg-amber-700 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center;
     }
 
     /*-------------  Header ----------------*/
@@ -158,92 +156,264 @@
     }
 
     .products-container {
-        @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 py-8 px-32 justify-items-center
-    }
-
-    .product-card {
-        @apply relative w-full max-w-[285px] aspect-[285/460] bg-primary-grey-light-pro overflow-hidden transition-transform duration-300 shadow-sm hover:shadow-xl
-    }
-
-    .product-img {
-        @apply relative w-full aspect-[285/301] bg-[#fbfbfc]
-    }
-
-    .product-img img {
-        @apply transition-transform duration-500 w-full aspect-[285/301] object-cover block;
-    }
-
-    .product-card:hover .product-img img {
-        @apply scale-105;
-    }
-
-    .badge-sale {
-        @apply absolute top-5 right-5 bg-primary-red text-white text-[16px] font-medium font-poppins w-[48px] h-[48px] rounded-full flex items-center justify-center
-    }
-
-    .badge-new {
-        @apply absolute top-5 left-5 bg-green-500 text-white text-sm rounded-sm font-semibold px-3 py-1;
-    }
-
-    .product-desc {
-        @apply bg-primary-light p-4 flex flex-col gap-1
-    }
-
-    .stars span:first-child {
-        @apply text-yellow-400 text-xl;
-    }
-
-    .reviews {
-        @apply text-gray-400 text-sm ml-1;
-    }
-
-    .product-desc h3 {
-        @apply font-semibold font-poppins text-[18px] text-primary-grey line-clamp-1
-    }
-
-    .product-desc p {
-        @apply font-medium font-poppins text-[12px] text-primary-grey-light line-clamp-2
-    }
-
-    .price-group {
-        @apply flex items-center gap-2
-    }
-
-    .price-group .new {
-        @apply font-semibold font-poppins text-[16px] text-primary-grey
-    }
-
-    .price-group .old {
-        @apply font-poppins text-[16px] text-primary-grey-light line-through
-    }
-
-    .card-hover {
-        @apply absolute z-10 inset-0 opacity-0 transition-opacity duration-300 bg-primary-grey flex flex-col justify-center items-center gap-8
-    }
-
-    .card-hover button {
-        @apply bg-white text-primary py-3 px-10 font-poppins font-semibold text-[16px]
-    }
-
-    .card-hover .options {
-        @apply flex gap-4 items-center font-poppins font-semibold text-[14px] text-white
-    }
-
-    .card-hover i {
-        @apply w-4 h-4
-    }
-
-    .product-card:hover .card-hover {
-        @apply opacity-75
-    }
-
-    .product-card:hover {
-        @apply -translate-y-1 shadow-xl;
+        @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 py-8 px-12 justify-items-center
     }
 
     .products-btn {
         @apply flex justify-center mt-10 w-[245px] aspect-[245/48] font-poppins font-semibold text-[16px] text-primary border border-primary
     }
+
+    /*-----------------  Product Card -------------------*/
+
+    /* .furniro-card {
+        @apply bg-[#FEFCF8] rounded-2xl border border-[#EDE8E0] overflow-hidden flex flex-col relative transition-all duration-300;
+        font-family: 'Poppins', sans-serif;
+    }
+    .furniro-card:hover {
+        @apply -translate-y-1 shadow-[0_20px_48px_rgba(90,60,20,0.12)];
+    }
+    .furniro-card .card-img-wrap {
+        @apply relative w-full h-[230px] bg-[#F4F0E8] overflow-hidden flex-shrink-0;
+    }
+    .furniro-card .card-img-wrap img {
+        @apply w-full h-full object-cover block transition-transform duration-500;
+    }
+    .furniro-card:hover .card-img-wrap img {
+        @apply scale-106;
+    }
+    .furniro-card .card-badges {
+        @apply absolute top-3 left-3 flex gap-1.5 z-[2];
+    }
+    .furniro-card .badge {
+        @apply text-[11px] font-semibold px-2.5 py-0.5 rounded-[20px] tracking-wide;
+        font-family: 'Poppins', sans-serif;
+    }
+    .furniro-card .badge-new  { @apply bg-primary text-white; }
+    .furniro-card .badge-sale { @apply bg-primary-red text-white; }
+    .furniro-card .card-wish {
+        @apply absolute top-3 right-3 z-[2] w-8 h-8 rounded-full bg-white/90 border-none cursor-pointer flex items-center justify-center opacity-0 scale-90 transition-all duration-250;
+    }
+    .furniro-card:hover .card-wish { @apply opacity-100 scale-100; }
+    .furniro-card .card-wish:hover { @apply bg-white; }
+    .furniro-card .card-wish.liked { @apply opacity-100 scale-100; }
+    .furniro-card .card-wish.liked svg path { @apply fill-primary-red stroke-primary-red; }
+    .furniro-card .card-body {
+        @apply p-[16px_18px_18px] flex flex-col flex-1;
+    }
+    .furniro-card .card-category {
+        @apply text-[11px] font-semibold tracking-[1.2px] uppercase text-primary m-0 mb-[5px];
+    }
+    .furniro-card .card-name {
+        @apply text-[16px] font-semibold text-[#2C2416] leading-[1.35] no-underline m-0 mb-[5px] line-clamp-1 transition-colors duration-200;
+        font-family: 'Poppins', sans-serif;
+    }
+    .furniro-card .card-name:hover { @apply text-primary; }
+    .furniro-card .card-desc {
+        @apply text-[12.5px] text-[#9A8E7C] leading-[1.6] m-0 line-clamp-2 flex-1 min-h-[40px];
+    }
+    .furniro-card .card-stars {
+        @apply text-[13px] text-primary m-0 mt-2 tracking-wide;
+    }
+    .furniro-card .card-footer {
+        @apply flex items-center justify-between gap-2.5 mt-[14px] pt-[14px] border-t border-[#EDE8E0];
+    }
+    .furniro-card .price-block {
+        @apply flex flex-col gap-px flex-shrink-0;
+    }
+    .furniro-card .price-current {
+        @apply text-[15px] font-semibold text-[#2C2416];
+        font-family: 'Poppins', sans-serif;
+    }
+    .furniro-card .price-original {
+        @apply text-[11.5px] text-[#C0B49A] line-through;
+    }
+    .furniro-card .view-btn {
+        @apply bg-primary text-white border-none px-4 py-[9px] rounded-[30px] text-[12px] font-semibold tracking-wide cursor-pointer no-underline inline-block whitespace-nowrap flex-shrink-0 transition-colors duration-200;
+        font-family: 'Poppins', sans-serif;
+    }
+    .furniro-card .view-btn:hover { @apply bg-[#9A7320]; } */
+    /* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Jost:wght@300;400;500;600&display=swap'); */
+
+/* ── Card shell ── */
+/* .furniro-card {
+    background: #FEFCF8;
+    border-radius: 16px;
+    border: 1px solid #EDE8E0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Jost', sans-serif;
+}
+.furniro-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 48px rgba(90, 60, 20, 0.12);
+}
+
+/* ── Image wrapper — position:relative is what keeps badges inside ── */
+.furniro-card .card-img-wrap {
+    position: relative;
+    width: 100%;
+    height: 230px;
+    background: #F4F0E8;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.furniro-card .card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+.furniro-card:hover .card-img-wrap img {
+    transform: scale(1.06);
+}
+
+/* ── Badges ── */
+.furniro-card .card-badges {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+}
+.furniro-card .badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius:20px;
+    letter-spacing: 0.3px;
+    font-family: 'Jost', sans-serif;
+}
+.furniro-card .badge-new  { background: #B88E2F; color: #fff; }
+.furniro-card .badge-sale { background: #E97171; color: #fff; }
+
+/* ── Wishlist heart — position:absolute keeps it inside the image ── */
+.furniro-card .card-wish {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s;
+}
+.furniro-card:hover .card-wish  { opacity: 1; transform: scale(1); }
+.furniro-card .card-wish:hover  { background: #fff; }
+.furniro-card .card-wish.liked  { opacity: 1; transform: scale(1); }
+.furniro-card .card-wish.liked svg path { fill: #E97171; stroke: #E97171; }
+
+/* ── Body ── */
+.furniro-card .card-body {
+    padding: 16px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.furniro-card .card-category {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #B88E2F;
+    margin: 0 0 5px;
+}
+.furniro-card .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2C2416;
+    line-height: 1.35;
+    margin: 0 0 6px;
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.2s;
+}
+.furniro-card .card-name:hover { color: #B88E2F; }
+
+.furniro-card .card-desc {
+    font-size: 12.5px;
+    color: #9A8E7C;
+    line-height: 1.6;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+    min-height: 40px;
+}
+.furniro-card .card-stars {
+    font-size: 13px;
+    color: #B88E2F;
+    margin: 8px 0 0;
+    letter-spacing: 1px;
+}
+
+/* ── Footer ── */
+.furniro-card .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid #EDE8E0;
+}
+
+/* price-block: flex-column stacks current price above strikethrough */
+.furniro-card .price-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    flex-shrink: 0;
+}
+.furniro-card .price-current {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2C2416;
+    font-family: 'Jost', sans-serif;
+}
+.furniro-card .price-original {
+    font-size: 11.5px;
+    color: #C0B49A;
+    text-decoration: line-through;
+}
+
+/* ── View Details button ── */
+.furniro-card .view-btn {
+    background: #B88E2F;
+    color: #fff;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 30px;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.2s ease;
+}
+.furniro-card .view-btn:hover { background: #9A7320; } */
 
     /* ------------- gallery_setup -----------------  */
     .gallery-setup {
@@ -378,339 +548,462 @@
     }
 
 
-                         /* -------------------   pages ------------------ */
+    /* -------------------   pages ------------------ */
 
-/* -------------------   header ------------------ */
+    /* -------------------   header ------------------ */
 
-.page-header {
-    @apply relative w-full h-[316px] flex items-center justify-center overflow-hidden;
-}
+    .page-header {
+        @apply relative w-full h-[316px] flex items-center justify-center overflow-hidden;
+    }
 
-.header-bg-container {
-    @apply absolute inset-0 z-0;
-}
-
-
-.header-bg-img {
-    @apply w-full h-full object-cover blur-[2px] scale-105;
-}
+    .header-bg-container {
+        @apply absolute inset-0 z-0;
+    }
 
 
-.header-overlay {
-    @apply absolute inset-0 bg-white/40 backdrop-blur-[1px];
-}
-
-.header-content {
-    @apply relative z-10 text-center flex flex-col items-center;
-}
-
-.header-logo {
-    @apply w-10 mb-2;
-}
-
-.header-title {
-    @apply text-4xl font-medium text-black font-poppins;
-}
-
-.breadcrumb {
-    @apply flex items-center  gap-2 mt-2 text-[16px] font-poppins;
-}
-
-.breadcrumb-link {
-    @apply font-medium font-poppins  text-black hover:text-[#B88E2F] transition-colors duration-300;
-}
-
-.breadcrumb-separator {
-    @apply font-medium text-black text-2xl;
-}
-
-.breadcrumb-current {
-    @apply font-light font-poppins text-black;
-}
-
-/* ---------------- filter -------------- */
-/* ── Filter Bar ── */
-.filter-bar {
-    @apply w-full flex items-center justify-around
-            py-4 bg-primary-beige;
-}
-
-.filter-bar-left {
-    @apply flex items-center gap-5;
-}
-
-.filter-bar-right {
-    @apply flex items-center gap-6;
-}
+    .header-bg-img {
+        @apply w-full h-full object-cover blur-[2px] scale-105;
+    }
 
 
-.filter-btn {
-    @apply flex items-center gap-2 font-poppins font-medium
-           text-[20px] text-primary-grey cursor-pointer
-           hover:text-primary transition-colors duration-200;
-    font-family: 'Poppins', sans-serif;
-}
+    .header-overlay {
+        @apply absolute inset-0 bg-white/40 backdrop-blur-[1px];
+    }
 
-.filter-dropdown-container {
-    position: relative;
-}
+    .header-content {
+        @apply relative z-10 text-center flex flex-col items-center;
+    }
 
-.chevron-icon {
-    transition: transform 0.3s ease;
-}
+    .header-logo {
+        @apply w-10 mb-2;
+    }
 
-.filter-dropdown-container.active .chevron-icon {
-    transform: rotate(180deg);
-}
+    .header-title {
+        @apply text-4xl font-medium text-black font-poppins;
+    }
 
-.filter-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin-top: 10px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    padding: 20px;
-    min-width: 220px;
-    z-index: 1000;
-    display: none;
-}
+    .breadcrumb {
+        @apply flex items-center gap-2 mt-2 text-[16px] font-poppins;
+    }
 
-.filter-dropdown.show {
-    display: block;
-}
+    .breadcrumb-link {
+        @apply font-medium font-poppins text-black hover:text-[#B88E2F] transition-colors duration-300;
+    }
 
-.filter-section {
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #e5e5e5;
-}
+    .breadcrumb-separator {
+        @apply font-medium text-black text-2xl;
+    }
 
-.filter-section:last-of-type {
-    margin-bottom: 15px;
-    padding-bottom: 0;
-    border-bottom: none;
-}
+    .breadcrumb-current {
+        @apply font-light font-poppins text-black;
+    }
 
-.filter-section-title {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
+    /* ---------------- filter -------------- */
+    /* ── Filter Bar ── */
+    .filter-bar {
+        @apply w-full flex items-center justify-around py-4 bg-primary-beige;
+    }
 
-.filter-option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 0;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    color: #555;
-    transition: color 0.2s;
-}
+    .filter-bar-left {
+        @apply flex items-center gap-5;
+    }
 
-.filter-option:hover {
-    color: #111;
-}
-
-.filter-checkbox {
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-    accent-color: #B5613A;
-}
-
-.filter-apply-btn {
-    width: 100%;
-    padding: 12px;
-    background: #B5613A;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.filter-apply-btn:hover {
-    background: #9A5230;
-}
-
-.filter-dropdown-container {
-    position: relative;
-}
-
-.chevron-icon {
-    transition: transform 0.3s ease;
-}
-
-.filter-dropdown-container.active .chevron-icon {
-    transform: rotate(180deg);
-}
-
-.filter-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin-top: 10px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    padding: 20px;
-    min-width: 220px;
-    z-index: 1000;
-    display: none;
-}
-
-.filter-dropdown.show {
-    display: block;
-}
-
-.filter-section {
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.filter-section:last-of-type {
-    margin-bottom: 15px;
-    padding-bottom: 0;
-    border-bottom: none;
-}
-
-.filter-section-title {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.filter-option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 0;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    color: #555;
-    transition: color 0.2s;
-}
-
-.filter-option:hover {
-    color: #111;
-}
-
-.filter-checkbox {
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-    accent-color: #B5613A;
-}
-
-.filter-apply-btn {
-    width: 100%;
-    padding: 12px;
-    background: #B5613A;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
+    .filter-bar-right {
+        @apply flex items-center gap-6;
+    }
 
 
-.filter-divider {
-    @apply w-px h-8 bg-gray-300;
-}
+    .filter-btn {
+        @apply flex items-center gap-2 font-poppins font-medium text-[20px] text-primary-grey cursor-pointer hover:text-primary transition-colors duration-200;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .filter-dropdown-container {
+        position: relative;
+    }
+
+    .chevron-icon {
+        transition: transform 0.3s ease;
+    }
+
+    .filter-dropdown-container.active .chevron-icon {
+        transform: rotate(180deg);
+    }
+
+    .filter-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        margin-top: 10px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        padding: 20px;
+        min-width: 220px;
+        z-index: 1000;
+        display: none;
+    }
+
+    .filter-dropdown.show {
+        display: block;
+    }
+
+    .filter-section {
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .filter-section:last-of-type {
+        margin-bottom: 15px;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .filter-section-title {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .filter-option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 0;
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        color: #555;
+        transition: color 0.2s;
+    }
+
+    .filter-option:hover {
+        color: #111;
+    }
+
+    .filter-checkbox {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        accent-color: #B5613A;
+    }
+
+    .filter-apply-btn {
+        width: 100%;
+        padding: 12px;
+        background: #B5613A;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .filter-apply-btn:hover {
+        background: #9A5230;
+    }
+
+    .filter-dropdown-container {
+        position: relative;
+    }
+
+    .chevron-icon {
+        transition: transform 0.3s ease;
+    }
+
+    .filter-dropdown-container.active .chevron-icon {
+        transform: rotate(180deg);
+    }
+
+    .filter-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        margin-top: 10px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        padding: 20px;
+        min-width: 220px;
+        z-index: 1000;
+        display: none;
+    }
+
+    .filter-dropdown.show {
+        display: block;
+    }
+
+    .filter-section {
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .filter-section:last-of-type {
+        margin-bottom: 15px;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .filter-section-title {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .filter-option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 0;
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        color: #555;
+        transition: color 0.2s;
+    }
+
+    .filter-option:hover {
+        color: #111;
+    }
+
+    .filter-checkbox {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        accent-color: #B5613A;
+    }
+
+    .filter-apply-btn {
+        width: 100%;
+        padding: 12px;
+        background: #B5613A;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
 
 
-.view-btn {
-    @apply text-gray-400 hover:text-primary-grey
-           transition-colors duration-200 cursor-pointer p-1;
-}
-
-.active-view {
-    @apply text-primary-grey;
-}
+    .filter-divider {
+        @apply w-px h-8 bg-gray-300;
+    }
 
 
-.results-text {
-    @apply font-poppins text-[16px] text-gray-500;
-}
+    .view-btn {
+        @apply text-gray-400 hover:text-primary-grey transition-colors duration-200 cursor-pointer p-1;
+    }
 
-/* right side controls */
-.filter-control {
-    @apply flex items-center gap-3;
-}
-
-.filter-control label {
-    @apply font-poppins text-[20px] text-black font-medium
-           whitespace-nowrap;
-}
+    .active-view {
+        @apply text-primary-grey;
+    }
 
 
-.filter-select {
-    @apply font-poppins text-[16px] text-primary-grey-light text-center
-           border  px-2 py-2
-           bg-white cursor-pointer
-           outline-none
-           appearance-none
-           hover:border-primary transition-colors duration-200;
-    min-width: 50px;
-}
+    .results-text {
+        @apply font-poppins text-[16px] text-gray-500;
+    }
+
+    /* right side controls */
+    .filter-control {
+        @apply flex items-center gap-3;
+    }
+
+    .filter-control label {
+        @apply font-poppins text-[20px] text-black font-medium whitespace-nowrap;
+    }
 
 
-/* ------------------- services ---------------- */
+    .filter-select {
+        @apply font-poppins text-[16px] text-primary-grey-light text-center border px-2 py-2 bg-white cursor-pointer outline-none appearance-none hover:border-primary transition-colors duration-200;
+        min-width: 50px;
+    }
 
-.service{
-    @apply bg-primary-beige 
-}
 
-.service-container{
-    @apply flex  items-center justify-around gap-0 py-20 
-}
+    /* ------------------- services ---------------- */
 
-.service-item{
-    @apply flex gap-2 place-items-start
-}
+    .service {
+        @apply bg-primary-beige
+    }
 
-.service-icon{
-    @apply w-14 h-16 text-[#242424]
-}
+    .service-container {
+        @apply flex items-center justify-around gap-0 py-20
+    }
 
-.service-title{
-    @apply font-poppins font-semibold text-xl text-[#242424]
-}
+    .service-item {
+        @apply flex gap-2 place-items-start
+    }
 
-.service-desc{
-    @apply font-poppins font-medium text-sm text-primary-grey-light py-1
-}
+    .service-icon {
+        @apply w-14 h-16 text-[#242424]
+    }
+
+    .service-title {
+        @apply font-poppins font-semibold text-xl text-[#242424]
+    }
+
+    .service-desc {
+        @apply font-poppins font-medium text-sm text-primary-grey-light py-1
+    }
 
 }
 
-
-.active-link {
-    color: #111827 !important;
-    font-weight: 600 !important;
+/* Cart Page Styles */
+.cart-section {
+    @apply bg-white min-h-screen;
 }
 
-.active-link::after {
-    width: 100% !important;
-    left: 0 !important;
-    transform: none !important;
+.cart-empty {
+    @apply text-center py-20;
+}
+
+.cart-empty-icon {
+    @apply text-6xl text-primary-grey-light-pro mb-6;
+}
+
+.cart-empty h2 {
+    @apply text-2xl font-semibold text-primary-grey mb-3;
+}
+
+.cart-empty p {
+    @apply text-primary-grey-light mb-6;
+}
+
+.cart-empty-btn {
+    @apply inline-block bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity;
+}
+
+.cart-container {
+    @apply grid grid-cols-1 lg:grid-cols-3 gap-8;
+}
+
+.cart-items {
+    @apply lg:col-span-2;
+}
+
+.cart-header {
+    @apply flex gap-8 py-4 px-16 pr-12 border-b-2 border-primary-grey mb-4;
+}
+
+.cart-header span {
+    @apply text-sm font-semibold pr-32 text-primary-grey uppercase tracking-wide;
+}
+
+.cart-item {
+    @apply flex gap-16 py-6 border-b border-gray-200 items-center;
+}
+
+.cart-item-image {
+    @apply col-span-2;
+}
+
+.cart-item-image img {
+    @apply w-24 h-24 object-cover rounded-lg;
+}
+
+.cart-item-info {
+    @apply col-span-4 flex flex-col justify-center;
+}
+
+.cart-item-name {
+    @apply font-semibold text-primary-grey mb-1 truncate;
+}
+
+.cart-item-category {
+    @apply text-sm text-primary-grey-light-pro;
+}
+
+.cart-item-price {
+    @apply col-span-2 text-primary-grey font-semibold text-center;
+}
+
+.cart-item-quantity {
+    @apply col-span-2 flex items-center justify-center;
+}
+
+.quantity-box {
+    @apply flex items-center border border-gray-300 rounded-lg overflow-hidden;
+}
+
+.quantity-box button {
+    @apply w-10 h-10 p-5 flex items-center justify-center bg-primary-light text-primary-grey hover:bg-primary hover:text-white transition-all font-bold;
+}
+
+.quantity-box span {
+    @apply w-12 h-10 flex items-center justify-center font-semibold text-primary-grey bg-white;
+}
+
+.cart-item-total {
+    @apply col-span-2 text-primary font-bold text-lg text-center;
+}
+
+.cart-item-remove {
+    @apply col-span-1 flex justify-end;
+}
+
+.cart-item-remove button {
+    @apply w-10 h-10 flex items-center justify-center text-gray-400 hover:text-primary-red transition-colors;
+}
+
+.cart-item-remove button i {
+    @apply text-lg;
+}
+
+.cart-summary {
+    @apply bg-primary-light rounded-xl p-6 h-fit sticky top-24;
+}
+
+.cart-summary h3 {
+    @apply text-xl font-bold text-primary-grey mb-6 pb-4 border-b border-gray-200;
+}
+
+.cart-summary-row {
+    @apply flex justify-between items-center mb-3;
+}
+
+.cart-summary-row span:first-child {
+    @apply text-primary-grey-light;
+}
+
+.cart-summary-row span:last-child {
+    @apply font-semibold text-primary-grey;
+}
+
+.cart-summary-total {
+    @apply flex justify-between items-center mb-6 pt-4 border-t-2 border-primary-grey;
+}
+
+.cart-summary-total span:first-child {
+    @apply text-lg font-bold text-primary-grey;
+}
+
+.cart-summary-total span:last-child {
+    @apply text-xl font-bold text-primary;
+}
+
+.cart-checkout-btn {
+    @apply w-full bg-primary text-white mx-20 mt-10 p-4 rounded-lg font-semibold text-center hover:opacity-90 transition-opacity;
+}
+
+.cart-continue-shopping {
+    @apply text-center mt-10;
+}
+
+.cart-continue-shopping a {
+    @apply text-primary-grey-light hover:text-primary transition-colors;
 }

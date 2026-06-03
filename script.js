@@ -366,10 +366,40 @@ function renderProducts() {
 
     if (showingCount) showingCount.textContent = visible.length;
     if (totalCount) totalCount.textContent = filteredProducts.length;
+    
     if (showMoreBtn) {
-        showMoreBtn.style.display = visibleCount >= sorted.length ? 'none' : 'block';
-    }
+        if (isShopPage()) {
+            if (visibleCount >= sorted.length) {
+                // 1. Change text and disable the button click
+                showMoreBtn.textContent = 'No More Products';
+                showMoreBtn.disabled = true;
 
+                // 2. Change styling to a clean disabled gray state
+                showMoreBtn.style.setProperty('border-color', '#9A8E7C', 'important');
+                showMoreBtn.style.setProperty('color', '#9A8E7C', 'important');
+                showMoreBtn.style.setProperty('cursor', 'not-allowed', 'important');
+                showMoreBtn.style.setProperty('background', 'transparent', 'important');
+            } else {
+                // Restore original active state
+                showMoreBtn.textContent = 'Show More';
+                showMoreBtn.disabled = false;
+                
+                // Remove inline style modifications so your CSS takes back control
+                showMoreBtn.style.removeProperty('border-color');
+                showMoreBtn.style.removeProperty('color');
+                showMoreBtn.style.removeProperty('cursor');
+                showMoreBtn.style.removeProperty('background');
+            }
+        } else {
+            // Home page keeps original default text and active behavior
+            showMoreBtn.textContent = 'Show More';
+            showMoreBtn.disabled = false;
+            showMoreBtn.style.removeProperty('border-color');
+            showMoreBtn.style.removeProperty('color');
+            showMoreBtn.style.removeProperty('cursor');
+            showMoreBtn.style.removeProperty('background');
+        }
+    }
     // Inject card styles once
     if (!document.getElementById('furniro-card-styles')) {
         const style = document.createElement('style');
@@ -465,7 +495,7 @@ function renderProducts() {
                 margin: 0 0 5px;
             }
             .furniro-card .card-name {
-                font-family: 'Playfair Display', serif;
+                font-family: poppins;
                 font-size: 16px;
                 font-weight: 600;
                 color: #2C2416;
@@ -600,6 +630,33 @@ function renderProducts() {
         });
 
         grid.appendChild(card);
+    });
+}
+
+// function handleShowMore() {
+//     const showMoreBtn = document.getElementById('show-more-btn');
+//     if (!showMoreBtn) return;
+
+//     showMoreBtn.addEventListener('click', () => {
+      
+//         visibleCount += 8; 
+//         renderProducts();
+//     });
+// }
+
+function handleShowMore() {
+    const showMoreBtn = document.getElementById('show-more-btn');
+    if (!showMoreBtn) return;
+
+    showMoreBtn.addEventListener('click', () => {
+        if (isShopPage()) {
+
+            visibleCount += 8; 
+            renderProducts();
+        } else {
+     
+            window.location.href = 'shop.html';
+        }
     });
 }
 // --------------------------------- Filter Functions -------------------
@@ -782,8 +839,10 @@ fetch('products.json')
             renderProducts();
             handleFilterBar();
             handleFilterDropdown();
+            handleShowMore();
         } else {
             renderProducts();
+            handleShowMore();
         }
     })
     .catch(err => console.error('Fetch error:', err));

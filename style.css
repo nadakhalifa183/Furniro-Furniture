@@ -331,7 +331,7 @@
     margin: 0 0 5px;
 }
 .furniro-card .card-name {
-    font-family: 'Playfair Display', serif;
+    /* font-family: 'Playfair Display', serif; */
     font-size: 16px;
     font-weight: 600;
     color: #2C2416;
